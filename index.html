@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_1.html -->
+<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_2.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -38,7 +38,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; overflow: auto; background: #1a1a2e; }
+  html, body { height: 100%; height: -webkit-fill-available; overflow: hidden; background: #1a1a2e; }
 
   body {
     font-family: var(--font);
@@ -52,6 +52,7 @@
     width: 100%;
     max-width: 430px;
     height: 100dvh;
+    min-height: -webkit-fill-available;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -190,7 +191,7 @@
 
   /* ====== UPLOAD SCREEN ====== */
   #screen-upload { background: var(--gray-50); }
-  .upload-scroll { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; -webkit-overflow-scrolling: touch; }
+  .upload-scroll { flex: 1; overflow-y: scroll; -webkit-overflow-scrolling: touch; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
 
   .card {
     background: #fff;
@@ -476,6 +477,7 @@
       <div class="user-avatar" id="user-initials">JD</div>
       <span class="header-title" id="user-name">Jake D.</span>
       <span class="drive-badge">Drive connected</span>
+      <button onclick="signOut()" style="border:none;background:none;font-size:12px;color:var(--gray-500);cursor:pointer;padding:4px 8px;border-radius:6px;" title="Sign out">Sign out</button>
     </div>
 
     <div class="upload-scroll">
@@ -495,7 +497,7 @@
           </div>
         </div>
         <div id="preview-grid" class="preview-grid" style="display:none"></div>
-        <input type="file" id="file-input" accept="image/*" multiple="" capture="environment" onchange="handleFiles(event)">
+        <input type="file" id="file-input" accept="image/*" multiple="" onchange="handleFiles(event)">
       </div>
 
       <!-- Auto-detected info -->
@@ -700,11 +702,56 @@ let state = {
   gallery: { folders: [], recent: [] },
 };
 
+const SESSION_KEY = 'fieldphotos_session';
+const SESSION_DAYS = 30;
+
+function saveSession(token, user) {
+  const expires = Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000;
+  localStorage.setItem(SESSION_KEY, JSON.stringify({ token, user, expires }));
+}
+
+function loadSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    if (Date.now() > s.expires) { localStorage.removeItem(SESSION_KEY); return null; }
+    return s;
+  } catch(e) { return null; }
+}
+
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+function applyUser(u) {
+  state.user = u;
+  const initials = (u.given_name?.[0] || '') + (u.family_name?.[0] || '');
+  const name = u.given_name + ' ' + (u.family_name?.[0] || '') + '.';
+  document.getElementById('user-initials').textContent = initials.toUpperCase();
+  document.getElementById('user-initials2').textContent = initials.toUpperCase();
+  document.getElementById('user-name').textContent = name;
+  document.getElementById('uploader-display').textContent = name;
+}
+
+// Check for existing session on page load
+window.addEventListener('load', () => {
+  const session = loadSession();
+  if (session) {
+    state.accessToken = session.token;
+    applyUser(session.user);
+    showScreen('upload');
+    setDateDisplay();
+    loadGallery();
+  } else {
+    showScreen('signin');
+  }
+});
+
 // ============================================================
 // SIGN IN
 // ============================================================
 function handleSignIn() {
-  // Use Google Identity Services token flow
   const tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CONFIG.CLIENT_ID,
     scope: CONFIG.SCOPES,
@@ -725,13 +772,8 @@ async function fetchUserInfo() {
     headers: { Authorization: 'Bearer ' + state.accessToken }
   });
   const u = await r.json();
-  state.user = u;
-  const initials = (u.given_name?.[0] || '') + (u.family_name?.[0] || '');
-  const name = u.given_name + ' ' + (u.family_name?.[0] || '') + '.';
-  document.getElementById('user-initials').textContent = initials.toUpperCase();
-  document.getElementById('user-initials2').textContent = initials.toUpperCase();
-  document.getElementById('user-name').textContent = name;
-  document.getElementById('uploader-display').textContent = name;
+  saveSession(state.accessToken, u);
+  applyUser(u);
 }
 
 // ============================================================
@@ -777,10 +819,44 @@ function readExif(file) {
     } catch(err) {}
 
     if (!gpsFound) {
-      // Fall back: use file's last modified date and a generic location label
-      document.getElementById('gps-display').textContent = 'No GPS in photo — using today\'s date for folder';
-      document.getElementById('gps-display').classList.remove('loading');
-      state.detectedLocation = formatDateForFolder(new Date());
+      // Try browser geolocation as fallback
+      if (navigator.geolocation) {
+        document.getElementById('gps-display').textContent = 'Getting your location...';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            reverseGeocode(pos.coords.latitude, pos.coords.longitude);
+          },
+          () => {
+            // Geolocation denied or failed — ask user to type location
+            document.getElementById('gps-display').textContent = 'Tap to enter job address';
+            document.getElementById('gps-display').style.cursor = 'pointer';
+            document.getElementById('gps-display').style.color = '#1a73e8';
+            document.getElementById('gps-display').onclick = () => {
+              const addr = prompt('Enter the job address (e.g. 1234 Elm St, Dallas):');
+              if (addr) {
+                state.detectedLocation = addr;
+                document.getElementById('gps-display').textContent = addr;
+                document.getElementById('gps-display').style.color = '';
+                document.getElementById('gps-display').style.cursor = '';
+              }
+            };
+          },
+          { timeout: 8000 }
+        );
+      } else {
+        document.getElementById('gps-display').textContent = 'Tap to enter job address';
+        document.getElementById('gps-display').style.cursor = 'pointer';
+        document.getElementById('gps-display').style.color = '#1a73e8';
+        document.getElementById('gps-display').onclick = () => {
+          const addr = prompt('Enter the job address (e.g. 1234 Elm St, Dallas):');
+          if (addr) {
+            state.detectedLocation = addr;
+            document.getElementById('gps-display').textContent = addr;
+            document.getElementById('gps-display').style.color = '';
+            document.getElementById('gps-display').style.cursor = '';
+          }
+        };
+      }
     }
   };
   reader.readAsArrayBuffer(file.slice(0, 131072)); // Read first 128KB for EXIF
@@ -1160,6 +1236,14 @@ function renderRecent(files, folders) {
 // ============================================================
 // NAVIGATION
 // ============================================================
+function signOut() {
+  clearSession();
+  state.accessToken = null;
+  state.user = null;
+  state.rootFolderId = null;
+  showScreen('signin');
+}
+
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
