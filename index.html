@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///C:/Users/manif/Downloads/index.html -->
+<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_2.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -150,17 +150,17 @@ body{display:flex;align-items:center;justify-content:center}
   </div>
   <div class="counter-box">
     <div class="counter-item">
-      <span class="counter-num" id="counter-photos">247+</span>
+      <span class="counter-num" id="counter-photos">—</span>
       <span class="counter-lbl">total photos</span>
     </div>
     <div class="counter-divider"></div>
     <div class="counter-item">
-      <span class="counter-num" id="counter-avg">18+</span>
+      <span class="counter-num" id="counter-avg">—</span>
       <span class="counter-lbl">avg per person</span>
     </div>
     <div class="counter-divider"></div>
     <div class="counter-item">
-      <span class="counter-num" id="counter-mine">0+</span>
+      <span class="counter-num" id="counter-mine">—</span>
       <span class="counter-lbl">your uploads</span>
     </div>
   </div>
@@ -180,8 +180,8 @@ body{display:flex;align-items:center;justify-content:center}
 <!-- UPLOAD -->
 <div class="screen" id="s-upload">
   <div class="hdr">
-    <div class="av" id="av1">?</div>
-    <span class="hdr-name" id="uname">—</span>
+    <div class="av" id="av1" onclick="goHome()" style="cursor:pointer" title="Home">?</div>
+    <span class="hdr-name" id="uname" onclick="goHome()" style="cursor:pointer">—</span>
     <span class="gbadge">Drive connected</span>
     <button class="sobtn" onclick="signOut()">Sign out</button>
   </div>
@@ -263,6 +263,10 @@ body{display:flex;align-items:center;justify-content:center}
     <div class="pfile" id="pfile"></div>
   </div>
   <div class="tabs">
+    <button class="tab" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Home
+    </button>
     <button class="tab on" onclick="goTab(&#39;upload&#39;)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path></svg>
       Upload
@@ -287,6 +291,7 @@ body{display:flex;align-items:center;justify-content:center}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
     Open folder in Drive
   </button>
+  <button class="morebtn" onclick="goHome()">Back to home</button>
   <button class="morebtn" onclick="resetUpload()">Upload more photos</button>
 </div>
 
@@ -303,6 +308,10 @@ body{display:flex;align-items:center;justify-content:center}
     <div id="recent-list"><div class="empty"><p>Loading...</p></div></div>
   </div>
   <div class="tabs">
+    <button class="tab" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Home
+    </button>
     <button class="tab" onclick="goTab(&#39;upload&#39;)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path></svg>
       Upload
@@ -319,6 +328,7 @@ body{display:flex;align-items:center;justify-content:center}
 const CLIENT_ID = '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
 const ROOT_NAME = 'Field Photos';
+const ROOT_FOLDER_ID = '1LX2LFFPVWCIdfTfK1hm55Nt_kidp84VZ';
 const SK = 'fp_sess';
 
 let token = null, currentUser = null, selectedFiles = [], detectedLocation = null, detectedDate = null, rootFolderId = null, tokenClient = null;
@@ -329,27 +339,11 @@ function loadSession() { try { const s = JSON.parse(localStorage.getItem(SK)); i
 function clearSession() { try { localStorage.removeItem(SK); } catch(e) {} }
 
 // BOOT
-async function loadPublicCounters() {
-  try {
-    const rootName = ROOT_NAME;
-    // We need a token to read Drive - counters load after signin
-    // Show animated placeholder instead
-    animateCounter('counter-photos', 247);
-    animateCounter('counter-avg', 18);
-    animateCounter('counter-mine', 0);
-  } catch(e) {}
-}
-
-function animateCounter(id, target) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  let val = 0;
-  const step = Math.ceil(target / 30);
-  const timer = setInterval(() => {
-    val = Math.min(val + step, target);
-    el.textContent = val + (val === target ? '+' : '');
-    if (val >= target) clearInterval(timer);
-  }, 40);
+function loadPublicCounters() {
+  // Counters need sign-in to read Drive — show dashes until then
+  document.getElementById('counter-photos').textContent = '—';
+  document.getElementById('counter-avg').textContent = '—';
+  document.getElementById('counter-mine').textContent = '—';
 }
 
 async function updateCounters() {
@@ -602,11 +596,8 @@ async function driveReq(url, method, body) {
 
 async function ensureRoot() {
   if(rootFolderId) return rootFolderId;
-  const q=encodeURIComponent("name='"+ROOT_NAME+"' and mimeType='application/vnd.google-apps.folder' and trashed=false");
-  const res=await driveReq('https://www.googleapis.com/drive/v3/files?q='+q+'&fields=files(id)');
-  if(res.files&&res.files.length){rootFolderId=res.files[0].id;return rootFolderId;}
-  const c=await driveReq('https://www.googleapis.com/drive/v3/files','POST',{name:ROOT_NAME,mimeType:'application/vnd.google-apps.folder'});
-  rootFolderId=c.id; return rootFolderId;
+  rootFolderId = ROOT_FOLDER_ID;
+  return rootFolderId;
 }
 
 async function ensureFolder(rootId, name) {
@@ -689,6 +680,11 @@ async function loadGallery() {
 }
 
 // NAV
+function goHome() {
+  updateCounters();
+  showScreen('signin');
+}
+
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');}
 
 function goTab(tab){
