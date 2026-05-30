@@ -1,745 +1,543 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_2.html -->
+<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_3.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Field Photos</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
+<title>Field Photos – Ben's Plumbing</title>
 <link href="./index_files/css2" rel="stylesheet">
 <style>
-  :root {
-    --blue: #1a73e8;
-    --blue-light: #e8f0fe;
-    --green: #1e8e3e;
-    --green-light: #e6f4ea;
-    --red: #d93025;
-    --amber: #f29900;
-    --amber-light: #fef7e0;
-    --gray-50: #f8f9fa;
-    --gray-100: #f1f3f4;
-    --gray-200: #e8eaed;
-    --gray-300: #dadce0;
-    --gray-400: #bdc1c6;
-    --gray-500: #9aa0a6;
-    --gray-600: #80868b;
-    --gray-700: #5f6368;
-    --gray-800: #3c4043;
-    --gray-900: #202124;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-pill: 99px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
-    --font: 'DM Sans', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-  }
+:root {
+  --blue: #1a73e8;
+  --blue-light: #e8f0fe;
+  --green: #1e8e3e;
+  --green-light: #e6f4ea;
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f4;
+  --gray-200: #e8eaed;
+  --gray-300: #dadce0;
+  --gray-400: #bdc1c6;
+  --gray-500: #9aa0a6;
+  --gray-600: #80868b;
+  --gray-700: #5f6368;
+  --gray-800: #3c4043;
+  --gray-900: #202124;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; height: -webkit-fill-available; overflow: hidden; background: #1a1a2e; }
+html { height: 100%; }
+body {
+  height: 100%;
+  font-family: var(--font);
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-  body {
-    font-family: var(--font);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.shell {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  height: 100dvh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
 
-  /* Phone shell */
-  .phone-shell {
-    width: 100%;
-    max-width: 430px;
-    height: 100dvh;
-    min-height: -webkit-fill-available;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-  }
+/* ── SCREENS ── */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+.screen.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
 
-  /* Screens */
-  .screen {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-  }
-  .screen.active { transform: translateX(0); }
-  .screen.slide-left { transform: translateX(-30%); }
+/* ── SIGN IN ── */
+#s-signin {
+  background: linear-gradient(160deg,#0f172a,#1e293b 60%,#0f172a);
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+  gap: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.logo-img { width: 200px; height: auto; margin-bottom: 28px; }
+.signin-title { font-size: 26px; font-weight: 600; color: #fff; margin-bottom: 8px; text-align: center; }
+.signin-sub { font-size: 14px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.6; margin-bottom: 36px; }
+.feature-list { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.feat {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.feat-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.feat p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+.feat strong { color: #fff; font-weight: 500; }
+.g-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 16px; background: #fff; border: none; border-radius: var(--radius);
+  font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--gray-800);
+  cursor: pointer; box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.signin-note { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; margin-top: 16px; }
 
-  /* ====== SIGN IN SCREEN ====== */
-  #screen-signin {
-    background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 40px 32px;
-  }
+/* ── HEADER ── */
+.hdr {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+.avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg,#3b82f6,#1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0;
+}
+.hdr-name { font-size: 15px; font-weight: 500; color: var(--gray-900); flex: 1; }
+.badge-green {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 500; color: var(--green);
+  background: var(--green-light); padding: 3px 9px; border-radius: 99px;
+}
+.badge-green::before { content:''; width:6px; height:6px; background:var(--green); border-radius:50%; }
+.signout-btn {
+  border: none; background: none; font-size: 11px;
+  color: var(--gray-500); cursor: pointer; padding: 4px 6px;
+  font-family: var(--font);
+}
 
-  .signin-logo {
-    width: 72px; height: 72px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 28px;
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
-  }
-  .signin-logo svg { width: 36px; height: 36px; }
+/* ── TAB BAR ── */
+.tabs {
+  display: flex; border-top: 1px solid var(--gray-200);
+  flex-shrink: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 10px 0;
+  border: none; background: transparent;
+  font-family: var(--font); font-size: 10px; font-weight: 500;
+  color: var(--gray-400); cursor: pointer;
+}
+.tab svg { width: 22px; height: 22px; }
+.tab.on { color: var(--blue); }
 
-  .signin-headline {
-    font-size: 28px; font-weight: 600;
-    color: #fff;
-    margin-bottom: 10px;
-    letter-spacing: -0.5px;
-    text-align: center;
-  }
-  .signin-sub {
-    font-size: 15px; color: rgba(255,255,255,0.55);
-    text-align: center; line-height: 1.6;
-    margin-bottom: 48px;
-  }
+/* ── UPLOAD SCREEN ── */
+#s-upload { background: var(--gray-50); }
+.scroll {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.card {
+  background: #fff; border-radius: var(--radius);
+  border: 1px solid var(--gray-200); overflow: hidden;
+}
+.card-lbl {
+  padding: 12px 14px 8px;
+  font-size: 11px; font-weight: 600; color: var(--gray-500);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.opt-lbl { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--gray-400); }
 
-  .feature-list {
-    width: 100%;
-    display: flex; flex-direction: column; gap: 14px;
-    margin-bottom: 48px;
-  }
-  .feature-item {
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 16px;
-    background: rgba(255,255,255,0.06);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-  .feature-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
-  }
-  .feature-item p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.4; }
-  .feature-item strong { color: #fff; font-weight: 500; }
+/* photo zone */
+.pzone {
+  margin: 0 14px 14px;
+  border: 2px dashed var(--gray-300); border-radius: var(--radius);
+  padding: 28px 14px; text-align: center; cursor: pointer;
+  background: var(--gray-50);
+}
+.pzone svg { width: 38px; height: 38px; color: var(--gray-400); margin-bottom: 8px; display: block; margin-left: auto; margin-right: auto; }
+.pzone p { font-size: 14px; font-weight: 500; color: var(--gray-700); }
+.pzone small { font-size: 12px; color: var(--gray-400); }
+#file-input { display: none; }
 
-  .google-signin-btn {
-    width: 100%;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    padding: 16px;
-    background: #fff;
-    border: none; border-radius: var(--radius);
-    font-family: var(--font); font-size: 15px; font-weight: 600;
-    color: var(--gray-800);
-    cursor: pointer;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-    transition: transform 0.1s, box-shadow 0.1s;
-  }
-  .google-signin-btn:active { transform: scale(0.98); box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.pgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+.pcell { aspect-ratio:1; position:relative; background:var(--gray-100); overflow:hidden; }
+.pcell img { width:100%; height:100%; object-fit:cover; display:block; }
+.pcell .xbtn {
+  position:absolute; top:4px; right:4px;
+  background:rgba(0,0,0,0.55); border:none; border-radius:50%;
+  width:22px; height:22px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.pcell .xbtn svg { width:13px; height:13px; color:#fff; }
+.addcell {
+  aspect-ratio:1; background:var(--gray-50);
+  border:2px dashed var(--gray-300);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.addcell svg { width:22px; height:22px; color:var(--gray-400); }
 
-  .signin-footer { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 20px; }
+/* auto-detect rows */
+.arow {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 14px; border-bottom:1px solid var(--gray-100);
+}
+.arow:last-child { border-bottom:none; }
+.aicon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.aicon svg { width:17px; height:17px; }
+.albl { font-size:11px; color:var(--gray-500); }
+.aval { font-size:13px; font-weight:500; color:var(--gray-900); }
+.aval.dim { color:var(--gray-400); }
+.aval.tap { color:var(--blue); cursor:pointer; text-decoration:underline; }
 
-  /* ====== HEADER ====== */
-  .app-header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px 16px 12px;
-    border-bottom: 1px solid var(--gray-200);
-    flex-shrink: 0;
-    background: #fff;
-  }
-  .user-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 600; color: #fff; flex-shrink: 0;
-  }
-  .header-title { font-size: 16px; font-weight: 600; color: var(--gray-900); flex: 1; }
-  .drive-badge {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 11px; font-weight: 500; color: var(--green);
-    background: var(--green-light);
-    padding: 4px 10px; border-radius: var(--radius-pill);
-  }
-  .drive-badge::before {
-    content: ''; width: 6px; height: 6px;
-    background: var(--green); border-radius: 50%;
-    flex-shrink: 0;
-  }
+/* tags */
+.tags { display:flex; flex-wrap:wrap; gap:8px; padding:4px 14px 14px; }
+.tag {
+  padding:6px 13px; border-radius:99px;
+  font-size:13px; font-weight:500;
+  border:1.5px solid var(--gray-300); background:transparent;
+  cursor:pointer; color:var(--gray-700); font-family:var(--font);
+  transition:all 0.12s;
+}
+.tag.on { border-color:var(--blue); background:var(--blue-light); color:var(--blue); }
 
-  /* ====== TAB BAR ====== */
-  .tab-bar {
-    display: flex;
-    border-top: 1px solid var(--gray-200);
-    flex-shrink: 0;
-    background: #fff;
-    padding-bottom: env(safe-area-inset-bottom, 0);
-  }
-  .tab-btn {
-    flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 4px; padding: 10px 0;
-    border: none; background: transparent;
-    font-family: var(--font); font-size: 10px;
-    font-weight: 500; color: var(--gray-500); cursor: pointer;
-    transition: color 0.15s;
-  }
-  .tab-btn svg { width: 22px; height: 22px; }
-  .tab-btn.active { color: var(--blue); }
+/* note */
+.note-ta {
+  width:100%; padding:12px 14px;
+  border:none; outline:none; resize:none;
+  font-family:var(--font); font-size:14px;
+  color:var(--gray-800); background:transparent; line-height:1.5;
+}
+.note-ta::placeholder { color:var(--gray-400); }
 
-  /* ====== UPLOAD SCREEN ====== */
-  #screen-upload { background: var(--gray-50); }
-  .upload-scroll { flex: 1; overflow-y: scroll; -webkit-overflow-scrolling: touch; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+/* upload button */
+.up-btn {
+  width:100%; padding:15px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  border:none; border-radius:var(--radius);
+  font-family:var(--font); font-size:15px; font-weight:600;
+  color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 4px 16px rgba(37,99,235,0.3);
+}
+.up-btn:disabled { opacity:0.4; cursor:not-allowed; box-shadow:none; }
+.up-btn svg { width:19px; height:19px; }
 
-  .card {
-    background: #fff;
-    border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    overflow: hidden;
-  }
-  .card-header {
-    padding: 14px 16px 10px;
-    font-size: 12px; font-weight: 600;
-    color: var(--gray-500); letter-spacing: 0.5px; text-transform: uppercase;
-  }
+/* progress */
+.prog-wrap {
+  position:absolute; inset:0; background:rgba(255,255,255,0.95);
+  display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; z-index:10;
+}
+.prog-wrap.show { display:flex; }
+.prog-ring { width:72px; height:72px; position:relative; }
+.prog-ring circle { fill:none; stroke-width:5; transform-origin:center; transform:rotate(-90deg); }
+.prog-ring .pbg { stroke:var(--gray-200); }
+.prog-ring .pfg { stroke:var(--blue); stroke-linecap:round; stroke-dasharray:188.5; stroke-dashoffset:188.5; transition:stroke-dashoffset 0.35s; }
+.prog-pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; color:var(--gray-900); }
+.prog-lbl { font-size:14px; color:var(--gray-600); }
+.prog-file { font-size:11px; color:var(--gray-400); font-family:var(--font-mono); max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
-  /* Photo picker */
-  .photo-zone {
-    margin: 0 16px 16px;
-    border: 2px dashed var(--gray-300);
-    border-radius: var(--radius);
-    padding: 28px 16px;
-    text-align: center; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    background: var(--gray-50);
-  }
-  .photo-zone:active { border-color: var(--blue); background: var(--blue-light); }
-  .photo-zone svg { width: 40px; height: 40px; color: var(--gray-400); margin-bottom: 10px; }
-  .photo-zone p { font-size: 14px; font-weight: 500; color: var(--gray-700); }
-  .photo-zone small { font-size: 12px; color: var(--gray-400); }
+/* ── SUCCESS ── */
+#s-success {
+  align-items:center; justify-content:center;
+  padding:40px 28px; gap:0;
+}
+.ok-icon {
+  width:76px; height:76px; border-radius:50%;
+  background:var(--green-light); display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+}
+.ok-icon svg { width:38px; height:38px; color:var(--green); }
+.ok-title { font-size:22px; font-weight:600; color:var(--gray-900); margin-bottom:8px; text-align:center; }
+.ok-sub { font-size:13px; color:var(--gray-600); text-align:center; line-height:1.6; margin-bottom:20px; }
+.ok-folder {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; margin-bottom:28px;
+  background:var(--gray-50); border-radius:var(--radius); border:1px solid var(--gray-200); width:100%;
+}
+.ok-folder svg { width:20px; height:20px; color:#f9ab00; flex-shrink:0; }
+.ok-folder span { font-size:13px; font-weight:500; color:var(--gray-800); }
+.drive-btn {
+  width:100%; padding:13px;
+  background:#fff; border:1.5px solid var(--gray-300); border-radius:var(--radius);
+  font-family:var(--font); font-size:14px; font-weight:600; color:var(--blue);
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:10px;
+}
+.drive-btn svg { width:15px; height:15px; }
+.more-btn {
+  width:100%; padding:13px; background:transparent; border:none;
+  font-family:var(--font); font-size:14px; color:var(--gray-500); cursor:pointer;
+}
 
-  .preview-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
-    margin: 0 0 0;
-  }
-  .preview-cell {
-    aspect-ratio: 1; position: relative;
-    background: var(--gray-100); overflow: hidden;
-  }
-  .preview-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .preview-cell .del-btn {
-    position: absolute; top: 4px; right: 4px;
-    background: rgba(0,0,0,0.6);
-    border: none; border-radius: 50%;
-    width: 24px; height: 24px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-  }
-  .preview-cell .del-btn svg { width: 14px; height: 14px; color: #fff; }
-  .add-more-cell {
-    aspect-ratio: 1; background: var(--gray-50);
-    border: 2px dashed var(--gray-300);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-  }
-  .add-more-cell svg { width: 24px; height: 24px; color: var(--gray-400); }
-  #file-input { display: none; }
+/* ── GALLERY ── */
+#s-gallery { background:var(--gray-50); }
+.gscroll { flex:1; overflow-y:scroll; -webkit-overflow-scrolling:touch; }
+.gsec { padding:12px 14px 5px; font-size:11px; font-weight:600; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.5px; }
+.fitem {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 14px; background:#fff; border-bottom:1px solid var(--gray-100); cursor:pointer;
+}
+.ficon { font-size:26px; flex-shrink:0; }
+.fmeta { flex:1; min-width:0; }
+.fname { font-size:14px; font-weight:500; color:var(--gray-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.finfo { font-size:12px; color:var(--gray-500); margin-top:2px; }
+.fchev svg { width:15px; height:15px; color:var(--gray-300); }
+.pitem { display:flex; align-items:center; gap:12px; padding:11px 14px; background:#fff; border-bottom:1px solid var(--gray-100); }
+.pthumb { width:52px; height:52px; border-radius:var(--radius-sm); object-fit:cover; background:var(--gray-200); flex-shrink:0; }
+.pinfo { flex:1; min-width:0; }
+.pname { font-size:13px; font-weight:500; color:var(--gray-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pmeta { font-size:11px; color:var(--gray-500); margin-top:3px; }
+.empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px; gap:10px; }
+.empty svg { width:44px; height:44px; color:var(--gray-300); }
+.empty p { font-size:14px; font-weight:500; color:var(--gray-500); text-align:center; }
+.empty small { font-size:12px; color:var(--gray-400); text-align:center; }
 
-  /* Auto-detect row */
-  .auto-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .auto-row:last-child { border-bottom: none; }
-  .auto-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .auto-icon svg { width: 18px; height: 18px; }
-  .auto-label { font-size: 11px; color: var(--gray-500); }
-  .auto-value { font-size: 13px; font-weight: 500; color: var(--gray-900); }
-  .auto-value.loading { color: var(--gray-400); }
-
-  /* Tags */
-  .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 16px 16px; }
-  .tag-chip {
-    padding: 6px 14px; border-radius: var(--radius-pill);
-    font-size: 13px; font-weight: 500;
-    border: 1.5px solid var(--gray-300);
-    background: transparent; cursor: pointer;
-    color: var(--gray-700); transition: all 0.15s;
-    font-family: var(--font);
-  }
-  .tag-chip.on {
-    border-color: var(--blue); background: var(--blue-light); color: var(--blue);
-  }
-
-  /* Note textarea */
-  .note-area {
-    width: 100%; padding: 12px 16px; margin-bottom: 4px;
-    border: none; outline: none; resize: none;
-    font-family: var(--font); font-size: 14px;
-    color: var(--gray-800); background: transparent;
-    line-height: 1.5;
-  }
-  .note-area::placeholder { color: var(--gray-400); }
-
-  /* Upload button */
-  .upload-cta {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    border: none; border-radius: var(--radius);
-    font-family: var(--font); font-size: 16px; font-weight: 600;
-    color: #fff; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: opacity 0.15s, transform 0.1s;
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
-  }
-  .upload-cta:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-  .upload-cta:not(:disabled):active { transform: scale(0.99); }
-  .upload-cta svg { width: 20px; height: 20px; }
-
-  /* Progress overlay */
-  .progress-overlay {
-    position: absolute; inset: 0;
-    background: rgba(255,255,255,0.95);
-    display: none; flex-direction: column;
-    align-items: center; justify-content: center; gap: 20px;
-    z-index: 10;
-  }
-  .progress-overlay.show { display: flex; }
-  .progress-ring { width: 72px; height: 72px; position: relative; }
-  .progress-ring circle {
-    fill: none; stroke-width: 5;
-    transform-origin: center; transform: rotate(-90deg);
-  }
-  .progress-ring .bg { stroke: var(--gray-200); }
-  .progress-ring .fg {
-    stroke: var(--blue); stroke-linecap: round;
-    stroke-dasharray: 200; stroke-dashoffset: 200;
-    transition: stroke-dashoffset 0.4s;
-  }
-  .progress-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; color: var(--gray-900); }
-  .progress-label { font-size: 14px; color: var(--gray-600); }
-  .progress-filename { font-size: 12px; color: var(--gray-400); font-family: var(--font-mono); }
-
-  /* ====== SUCCESS SCREEN ====== */
-  #screen-success {
-    align-items: center; justify-content: center;
-    padding: 40px 32px; gap: 0;
-    background: #fff;
-  }
-  .success-icon {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: var(--green-light);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
-  }
-  .success-icon svg { width: 40px; height: 40px; color: var(--green); }
-  .success-title { font-size: 24px; font-weight: 600; color: var(--gray-900); margin-bottom: 10px; text-align: center; }
-  .success-sub { font-size: 14px; color: var(--gray-600); text-align: center; line-height: 1.6; margin-bottom: 8px; }
-  .success-folder {
-    display: flex; align-items: center; gap: 8px;
-    padding: 12px 16px; margin: 20px 0 32px;
-    background: var(--gray-50); border-radius: var(--radius);
-    border: 1px solid var(--gray-200); width: 100%;
-  }
-  .success-folder svg { width: 20px; height: 20px; color: #f9ab00; flex-shrink: 0; }
-  .success-folder span { font-size: 13px; font-weight: 500; color: var(--gray-800); }
-
-  .drive-link-btn {
-    width: 100%; padding: 14px;
-    background: #fff; border: 1.5px solid var(--gray-300);
-    border-radius: var(--radius);
-    font-family: var(--font); font-size: 14px; font-weight: 600;
-    color: var(--blue); cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin-bottom: 12px;
-    transition: background 0.15s;
-  }
-  .drive-link-btn:active { background: var(--blue-light); }
-  .drive-link-btn svg { width: 16px; height: 16px; }
-
-  .upload-more-btn {
-    width: 100%; padding: 14px;
-    background: transparent; border: none;
-    font-family: var(--font); font-size: 14px;
-    color: var(--gray-500); cursor: pointer;
-  }
-
-  /* ====== GALLERY SCREEN ====== */
-  #screen-gallery { background: var(--gray-50); }
-  .gallery-scroll { flex: 1; overflow-y: auto; }
-
-  .folder-section { padding: 12px 16px 6px; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; }
-
-  .folder-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 16px; background: #fff;
-    border-bottom: 1px solid var(--gray-100); cursor: pointer;
-    transition: background 0.1s;
-  }
-  .folder-item:active { background: var(--gray-50); }
-  .folder-icon { font-size: 28px; flex-shrink: 0; }
-  .folder-meta { flex: 1; min-width: 0; }
-  .folder-name { font-size: 14px; font-weight: 500; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .folder-info { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
-  .folder-chevron svg { width: 16px; height: 16px; color: var(--gray-300); }
-
-  .recent-section { padding: 12px 16px 6px; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; }
-
-  .photo-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 16px; background: #fff;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .photo-thumb {
-    width: 56px; height: 56px; border-radius: var(--radius-sm);
-    object-fit: cover; background: var(--gray-200); flex-shrink: 0;
-  }
-  .photo-info { flex: 1; min-width: 0; }
-  .photo-name { font-size: 13px; font-weight: 500; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .photo-meta { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
-  .photo-tags { display: flex; gap: 4px; margin-top: 5px; }
-  .photo-tag { font-size: 10px; padding: 2px 7px; border-radius: var(--radius-pill); background: var(--blue-light); color: var(--blue); font-weight: 500; }
-
-  .empty-gallery { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 32px; gap: 12px; }
-  .empty-gallery svg { width: 48px; height: 48px; color: var(--gray-300); }
-  .empty-gallery p { font-size: 15px; font-weight: 500; color: var(--gray-500); text-align: center; }
-  .empty-gallery small { font-size: 13px; color: var(--gray-400); text-align: center; }
-
-  /* Loading skeleton */
-  @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
-  .shimmer {
-    background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-up { animation: fadeUp 0.3s ease forwards; }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .spin { animation: spin 1s linear infinite; }
-
-  /* Spinner for uploading state */
-  .spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; }
+@keyframes spin { to { transform:rotate(360deg); } }
 </style>
 <style id="googleidentityservice_button_styles">.qJTHM{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;color:#202124;direction:ltr;-webkit-touch-callout:none;font-family:Roboto-Regular,arial,sans-serif;-webkit-font-smoothing:antialiased;font-weight:400;margin:0;overflow:hidden;-webkit-text-size-adjust:100%}.ynRLnc{left:-9999px;position:absolute;top:-9999px}.L6cTce{display:none}.bltWBb{overflow-wrap:break-word;word-break:break-word}.hSRGPd{color:#1a73e8;cursor:pointer;font-weight:500;text-decoration:none}.Bz112c-W3lGp{height:16px;width:16px}.Bz112c-E3DyYd{height:20px;width:20px}.Bz112c-r9oPif{height:24px;width:24px}.Bz112c-u2z5K{height:36px;width:36px}.Bz112c-uaxL4e{border-radius:10px}.LgbsSe-Bz112c{display:block}.S9gUrf-YoZ4jf{border:none;margin:0;padding:0}.S9gUrf-YoZ4jf *{border:none;margin:0;padding:0}.fFW7wc-ibnC6b>.aZ2wEe>div{border-color:#4285f4}.P1ekSe-ZMv3u{-webkit-transition:height .2s linear;transition:height .2s linear}.P1ekSe-ZMv3u>div:first-child{background-color:#1a73e8!important;-webkit-transition:width .3s linear;transition:width .3s linear}.P1ekSe-ZMv3u>div:nth-child(2){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.P1ekSe-ZMv3u>div:nth-child(3){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.haAclf{display:inline-block}.nsm7Bb-HzV7m-LgbsSe{border-radius:4px;box-sizing:border-box;-webkit-transition:background-color .218s,border-color .218s;transition:background-color .218s,border-color .218s;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#fff;background-image:none;border:1px solid #dadce0;color:#3c4043;cursor:pointer;font-family:Google Sans,arial,sans-serif;font-size:14px;height:40px;letter-spacing:.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;vertical-align:middle;white-space:nowrap;width:auto}@media screen and (-ms-high-contrast:active){.nsm7Bb-HzV7m-LgbsSe{border:2px solid windowText;color:windowText}}@media screen and (preferes-contrast:more){.nsm7Bb-HzV7m-LgbsSe{color:#000}}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe{font-size:14px;height:32px;letter-spacing:.25px;padding:0 10px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe{font-size:11px;height:20px;letter-spacing:.3px;padding:0 8px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe{padding:0;width:40px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe{width:32px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe{width:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK{border-radius:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe{border-radius:16px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe{border-radius:10px}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc{border:none;color:#fff}.nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc{background-color:#1a73e8}.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{background-color:#202124;color:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{color:#fff}}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:18px;margin-right:8px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:14px;min-width:14px;width:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:10px;min-width:10px;width:10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin-left:8px;margin-right:-4px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:10px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:8px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:4px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:3px;border-bottom-left-radius:3px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center;background-color:#fff;height:36px;margin-left:-10px;margin-right:12px;min-width:36px;width:36px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:28px;margin-left:-8px;margin-right:10px;min-width:28px;width:28px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:16px;margin-left:-6px;margin-right:8px;min-width:16px;width:16px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:3px;margin-left:2px;margin-right:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:8px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;position:relative;width:100%}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX{-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:1;-webkit-box-flex:1;flex-grow:1;font-family:Google Sans,arial,sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-weight:300}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:0;-webkit-box-flex:0;flex-grow:0}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe{-webkit-transition:background-color .218s;transition:background-color .218s;bottom:0;left:0;position:absolute;right:0;top:0}.nsm7Bb-HzV7m-LgbsSe:focus,.nsm7Bb-HzV7m-LgbsSe:hover{box-shadow:none;border-color:rgb(210,227,252);outline:none}.nsm7Bb-HzV7m-LgbsSe:focus-within{outline:2px solid #00639b;border-color:transparent}.nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.08)}.nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.1)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.24)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.32)}.nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY{border-radius:50%;display:-webkit-box;display:-webkit-flex;display:flex;height:20px;margin-left:-4px;margin-right:8px;min-width:20px;width:20px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-family:Roboto;font-size:12px;text-align:left}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS,.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf{overflow:hidden;text-overflow:ellipsis}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;color:#5f6368;fill:#5f6368;font-size:11px;font-weight:400}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#e8eaed;fill:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff,.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#000;fill:#000}}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c{height:18px;margin:-3px -3px -3px 2px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-bottom-right-radius:3px;margin-left:12px;margin-right:-10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.L5Fo6c-sM5MNb{border:0;display:block;left:0;position:relative;top:0}.L5Fo6c-bF1uUb{border-radius:4px;bottom:0;cursor:pointer;left:0;position:absolute;right:0;top:0}.L5Fo6c-bF1uUb:focus{border:none;outline:none}sentinel{}</style></head>
 <body>
+<div class="shell">
 
-<div class="phone-shell">
-
-  <!-- ===== SIGN IN ===== -->
-  <div class="screen active" id="screen-signin">
-    <div class="signin-logo" style="background:none;box-shadow:none;width:auto;height:auto;border-radius:0;">
-      <img src="./index_files/logo-bens-for-header-desk-v4.svg" alt="Ben&#39;s Plumbing" style="width:200px;height:auto;">
+<!-- SIGN IN -->
+<div class="screen active" id="s-signin">
+  <img class="logo-img" src="./index_files/logo-bens-for-header-desk-v4.svg" alt="Ben&#39;s Plumbing" onerror="this.style.display=&#39;none&#39;">
+  <p class="signin-title">Field Photos</p>
+  <p class="signin-sub">Upload job photos from the field — they go straight to Google Drive for your content team.</p>
+  <div class="feature-list">
+    <div class="feat">
+      <div class="feat-icon" style="background:rgba(59,130,246,0.15)">📍</div>
+      <p><strong>Auto-organized by location</strong><br>GPS from your photo names the folder automatically</p>
     </div>
-    <p class="signin-headline">Field Photos</p>
-    <p class="signin-sub">Upload job photos from the field — they go straight to Google Drive for your content team.</p>
-
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="feature-icon" style="background:rgba(59,130,246,0.15)">📍</div>
-        <p><strong>Auto-organized by location</strong><br>GPS from your photo names the folder automatically</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon" style="background:rgba(34,197,94,0.15)">⚡</div>
-        <p><strong>3 taps to upload</strong><br>No typing, no forms — just pick photos and go</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon" style="background:rgba(249,115,22,0.15)">🗂️</div>
-        <p><strong>Content team gets instant access</strong><br>Photos land in Drive the second you upload</p>
-      </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:rgba(34,197,94,0.15)">⚡</div>
+      <p><strong>3 taps to upload</strong><br>No typing, no forms — just pick photos and go</p>
     </div>
-
-    <button class="google-signin-btn" onclick="handleSignIn()">
-      <svg width="20" height="20" viewBox="0 0 48 48">
-        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.33 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"></path>
-        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
-        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
-        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.58-13.46-8.91l-7.98 6.19C6.51 42.67 14.62 48 24 48z"></path>
-      </svg>
-      Continue with Google
-    </button>
-    <p class="signin-footer">Your Google account — no new password needed</p>
-  </div>
-
-  <!-- ===== UPLOAD ===== -->
-  <div class="screen" id="screen-upload">
-    <div class="app-header">
-      <div class="user-avatar" id="user-initials">JD</div>
-      <span class="header-title" id="user-name">Jake D.</span>
-      <span class="drive-badge">Drive connected</span>
-      <button onclick="signOut()" style="border:none;background:none;font-size:12px;color:var(--gray-500);cursor:pointer;padding:4px 8px;border-radius:6px;" title="Sign out">Sign out</button>
-    </div>
-
-    <div class="upload-scroll">
-
-      <!-- Photo picker -->
-      <div class="card">
-        <div class="card-header">Photos</div>
-        <div id="photo-zone-wrap">
-          <div class="photo-zone" onclick="triggerFilePick()" id="photo-zone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-              <circle cx="12" cy="13" r="4"></circle>
-              <line x1="12" y1="10" x2="12" y2="16"></line><line x1="9" y1="13" x2="15" y2="13"></line>
-            </svg>
-            <p>Tap to take or choose photos</p>
-            <small>JPEG, PNG, HEIC — multiple OK</small>
-          </div>
-        </div>
-        <div id="preview-grid" class="preview-grid" style="display:none"></div>
-        <input type="file" id="file-input" accept="image/*" multiple="" onchange="handleFiles(event)">
-      </div>
-
-      <!-- Auto-detected info -->
-      <div class="card">
-        <div class="card-header">Auto-detected</div>
-        <div class="auto-row">
-          <div class="auto-icon" style="background:#fef3c7">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </div>
-          <div>
-            <div class="auto-label">Location (from photo GPS)</div>
-            <div class="auto-value loading" id="gps-display">Reading GPS from photo...</div>
-          </div>
-        </div>
-        <div class="auto-row">
-          <div class="auto-icon" style="background:#ede9fe">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-          </div>
-          <div>
-            <div class="auto-label">Date taken</div>
-            <div class="auto-value" id="date-display">—</div>
-          </div>
-        </div>
-        <div class="auto-row" style="border-bottom:none">
-          <div class="auto-icon" style="background:#dcfce7">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
-          <div>
-            <div class="auto-label">Uploaded by</div>
-            <div class="auto-value" id="uploader-display">—</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tags -->
-      <div class="card">
-        <div class="card-header">Tag <span style="color:var(--gray-400);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
-        <div class="tags-wrap">
-          <button class="tag-chip" onclick="toggleTag(this)">Before</button>
-          <button class="tag-chip" onclick="toggleTag(this)">After</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Leak</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Install</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Inspection</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Emergency</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Repair</button>
-          <button class="tag-chip" onclick="toggleTag(this)">Drain</button>
-        </div>
-      </div>
-
-      <!-- Note -->
-      <div class="card">
-        <div class="card-header">Note <span style="color:var(--gray-400);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
-        <textarea class="note-area" id="note-input" rows="3" placeholder="e.g. Corroded valve under kitchen sink, customer said it&#39;s been leaking for a week..."></textarea>
-      </div>
-
-      <!-- Upload button -->
-      <button class="upload-cta" id="upload-btn" disabled="" onclick="startUpload()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line>
-          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-        </svg>
-        Upload to Google Drive
-      </button>
-
-    </div><!-- end scroll -->
-
-    <!-- Progress overlay -->
-    <div class="progress-overlay" id="progress-overlay">
-      <div class="progress-ring">
-        <svg viewBox="0 0 72 72" width="72" height="72">
-          <circle class="bg" cx="36" cy="36" r="30"></circle>
-          <circle class="fg" id="progress-circle" cx="36" cy="36" r="30" style="stroke-dasharray: 188.5; stroke-dashoffset: 188.5;"></circle>
-        </svg>
-        <div class="progress-text" id="progress-pct">0%</div>
-      </div>
-      <div class="progress-label" id="progress-label">Uploading photos...</div>
-      <div class="progress-filename" id="progress-file"></div>
-    </div>
-
-    <div class="tab-bar">
-      <button class="tab-btn active" onclick="showTab(&#39;upload&#39;)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line>
-          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-        </svg>
-        Upload
-      </button>
-      <button class="tab-btn" onclick="showTab(&#39;gallery&#39;)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>
-        </svg>
-        Gallery
-      </button>
+    <div class="feat">
+      <div class="feat-icon" style="background:rgba(249,115,22,0.15)">🗂️</div>
+      <p><strong>Content team gets instant access</strong><br>Photos land in Drive the second you upload</p>
     </div>
   </div>
+  <button class="g-btn" onclick="handleSignIn()">
+    <svg width="20" height="20" viewBox="0 0 48 48">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.33 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"></path>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.58-13.46-8.91l-7.98 6.19C6.51 42.67 14.62 48 24 48z"></path>
+    </svg>
+    Continue with Google
+  </button>
+  <p class="signin-note">Your Google account — no new password needed</p>
+</div>
 
-  <!-- ===== SUCCESS ===== -->
-  <div class="screen" id="screen-success">
-    <div class="success-icon">
+<!-- UPLOAD -->
+<div class="screen" id="s-upload">
+  <div class="hdr">
+    <div class="avatar" id="av1">?</div>
+    <span class="hdr-name" id="uname">Loading...</span>
+    <span class="badge-green">Drive connected</span>
+    <button class="signout-btn" onclick="signOut()">Sign out</button>
+  </div>
+  <div class="scroll">
+    <div class="card">
+      <div class="card-lbl">Photos</div>
+      <div id="pzone-wrap">
+        <div class="pzone" onclick="document.getElementById(&#39;file-input&#39;).click()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle>
+            <line x1="12" y1="10" x2="12" y2="16"></line><line x1="9" y1="13" x2="15" y2="13"></line>
+          </svg>
+          <p>Tap to take or choose photos</p>
+          <small>Supports camera, photo library &amp; files</small>
+        </div>
+      </div>
+      <div id="pgrid" class="pgrid" style="display:none"></div>
+      <input type="file" id="file-input" accept="image/*" multiple="" onchange="handleFiles(event)">
+    </div>
+
+    <div class="card">
+      <div class="card-lbl">Auto-detected</div>
+      <div class="arow">
+        <div class="aicon" style="background:#fef3c7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div>
+          <div class="albl">Location (from GPS)</div>
+          <div class="aval dim" id="gps-val">Add photos to detect location</div>
+        </div>
+      </div>
+      <div class="arow">
+        <div class="aicon" style="background:#ede9fe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <div>
+          <div class="albl">Date</div>
+          <div class="aval" id="date-val">—</div>
+        </div>
+      </div>
+      <div class="arow">
+        <div class="aicon" style="background:#dcfce7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div>
+          <div class="albl">Uploaded by</div>
+          <div class="aval" id="uploader-val">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-lbl">Tag <span class="opt-lbl">(optional)</span></div>
+      <div class="tags">
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Before</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">After</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Leak</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Install</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Inspection</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Emergency</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Repair</button>
+        <button class="tag" onclick="this.classList.toggle(&#39;on&#39;)">Drain</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-lbl">Note <span class="opt-lbl">(optional)</span></div>
+      <textarea class="note-ta" id="note-input" rows="3" placeholder="e.g. Corroded valve under kitchen sink..."></textarea>
+    </div>
+
+    <button class="up-btn" id="up-btn" disabled="" onclick="startUpload()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"></polyline>
+        <polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line>
+        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
       </svg>
-    </div>
-    <p class="success-title">Photos uploaded!</p>
-    <p class="success-sub">Your content team can access them in Google Drive right now.</p>
-
-    <div class="success-folder">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>
-      <span id="success-folder-name">Loading...</span>
-    </div>
-
-    <button class="drive-link-btn" id="drive-open-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-        <polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
-      </svg>
-      Open folder in Drive
+      Upload to Google Drive
     </button>
-
-    <button class="upload-more-btn" onclick="resetUpload()">Upload more photos</button>
   </div>
 
-  <!-- ===== GALLERY ===== -->
-  <div class="screen" id="screen-gallery">
-    <div class="app-header">
-      <div class="user-avatar" id="user-initials2">JD</div>
-      <span class="header-title">Job library</span>
+  <!-- Progress overlay -->
+  <div class="prog-wrap" id="prog-wrap">
+    <div class="prog-ring">
+      <svg viewBox="0 0 72 72" width="72" height="72">
+        <circle class="pbg" cx="36" cy="36" r="30"></circle>
+        <circle class="pfg" id="pfg" cx="36" cy="36" r="30"></circle>
+      </svg>
+      <div class="prog-pct" id="prog-pct">0%</div>
     </div>
-
-    <div class="gallery-scroll">
-      <div class="folder-section">Folders in Google Drive</div>
-      <div id="folder-list">
-        <div style="padding:32px;text-align:center">
-          <div style="width:100%;height:16px;margin-bottom:8px" class="shimmer"></div>
-          <div style="width:80%;height:16px;margin-bottom:8px" class="shimmer"></div>
-          <div style="width:90%;height:16px" class="shimmer"></div>
-        </div>
-      </div>
-      <div class="recent-section">Recent uploads</div>
-      <div id="recent-list">
-        <div style="padding:24px 16px;display:flex;gap:12px;align-items:center">
-          <div style="width:56px;height:56px;border-radius:8px;flex-shrink:0" class="shimmer"></div>
-          <div style="flex:1">
-            <div style="height:14px;margin-bottom:6px" class="shimmer"></div>
-            <div style="height:12px;width:70%" class="shimmer"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-bar">
-      <button class="tab-btn" onclick="showTab(&#39;upload&#39;)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line>
-          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-        </svg>
-        Upload
-      </button>
-      <button class="tab-btn active" onclick="showTab(&#39;gallery&#39;)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>
-        </svg>
-        Gallery
-      </button>
-    </div>
+    <div class="prog-lbl" id="prog-lbl">Uploading...</div>
+    <div class="prog-file" id="prog-file"></div>
   </div>
 
-</div><!-- end phone shell -->
+  <div class="tabs">
+    <button class="tab on" onclick="goTab(&#39;upload&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path></svg>
+      Upload
+    </button>
+    <button class="tab" onclick="goTab(&#39;gallery&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+      Gallery
+    </button>
+  </div>
+</div>
 
-<!-- Google APIs -->
+<!-- SUCCESS -->
+<div class="screen" id="s-success">
+  <div class="ok-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+  <p class="ok-title">Photos uploaded!</p>
+  <p class="ok-sub">Your content team can access them in Google Drive right now.</p>
+  <div class="ok-folder">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>
+    <span id="ok-folder-name">—</span>
+  </div>
+  <button class="drive-btn" id="drive-open-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Open folder in Drive
+  </button>
+  <button class="more-btn" onclick="resetUpload()">Upload more photos</button>
+</div>
+
+<!-- GALLERY -->
+<div class="screen" id="s-gallery">
+  <div class="hdr">
+    <div class="avatar" id="av2">?</div>
+    <span class="hdr-name">Job library</span>
+  </div>
+  <div class="gscroll">
+    <div class="gsec">Folders in Google Drive</div>
+    <div id="folder-list"><div class="empty"><p>Loading...</p></div></div>
+    <div class="gsec">Recent uploads</div>
+    <div id="recent-list"><div class="empty"><p>Loading...</p></div></div>
+  </div>
+  <div class="tabs">
+    <button class="tab" onclick="goTab(&#39;upload&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path></svg>
+      Upload
+    </button>
+    <button class="tab on" onclick="goTab(&#39;gallery&#39;)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+      Gallery
+    </button>
+  </div>
+</div>
+
+</div><!-- end shell -->
+
 <script src="./index_files/client" async="" defer=""></script>
-
 <script>
-// ============================================================
-// CONFIG — replace these with your values (see SETUP.md)
-// ============================================================
-const CONFIG = {
-  CLIENT_ID: '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com',
-  API_KEY: 'YOUR_GOOGLE_API_KEY',
-  DRIVE_FOLDER_NAME: 'Field Photos',   // root folder in Drive
-  SCOPES: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile',
-};
+// ── CONFIG ──────────────────────────────────────────────────
+const CLIENT_ID = '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com';
+const SCOPES    = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
+const ROOT_NAME = 'Field Photos';
+const SESSION_KEY = 'fp_session';
+const SESSION_MS  = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-// ============================================================
-// STATE
-// ============================================================
-let state = {
-  accessToken: null,
-  user: null,
-  selectedFiles: [],
-  detectedLocation: null,
-  detectedDate: null,
-  rootFolderId: null,
-  uploadedFolderId: null,
-  uploadedFolderName: null,
-  gallery: { folders: [], recent: [] },
-};
+// ── STATE ────────────────────────────────────────────────────
+let token = null;
+let currentUser = null;
+let selectedFiles = [];
+let detectedLocation = null;
+let detectedDate = null;
+let rootFolderId = null;
+let lastJobFolderId = null;
+let lastJobFolderName = null;
 
-const SESSION_KEY = 'fieldphotos_session';
-const SESSION_DAYS = 30;
-
-function saveSession(token, user) {
-  const expires = Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000;
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ token, user, expires }));
+// ── SESSION ──────────────────────────────────────────────────
+function saveSession(t, u) {
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify({ t, u, exp: Date.now() + SESSION_MS })); } catch(e) {}
 }
-
 function loadSession() {
   try {
-    const raw = localStorage.getItem(SESSION_KEY);
-    if (!raw) return null;
-    const s = JSON.parse(raw);
-    if (Date.now() > s.expires) { localStorage.removeItem(SESSION_KEY); return null; }
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    if (!s || Date.now() > s.exp) { localStorage.removeItem(SESSION_KEY); return null; }
     return s;
   } catch(e) { return null; }
 }
-
 function clearSession() {
-  localStorage.removeItem(SESSION_KEY);
+  try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
 }
 
-function applyUser(u) {
-  state.user = u;
-  const initials = (u.given_name?.[0] || '') + (u.family_name?.[0] || '');
-  const name = u.given_name + ' ' + (u.family_name?.[0] || '') + '.';
-  document.getElementById('user-initials').textContent = initials.toUpperCase();
-  document.getElementById('user-initials2').textContent = initials.toUpperCase();
-  document.getElementById('user-name').textContent = name;
-  document.getElementById('uploader-display').textContent = name;
-}
-
-// Check for existing session on page load
+// ── BOOT ─────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  const session = loadSession();
-  if (session) {
-    state.accessToken = session.token;
-    applyUser(session.user);
+  const s = loadSession();
+  if (s) {
+    token = s.t;
+    applyUser(s.u);
     showScreen('upload');
     setDateDisplay();
     loadGallery();
@@ -748,530 +546,365 @@ window.addEventListener('load', () => {
   }
 });
 
-// ============================================================
-// SIGN IN
-// ============================================================
+// ── AUTH ─────────────────────────────────────────────────────
 function handleSignIn() {
-  const tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CONFIG.CLIENT_ID,
-    scope: CONFIG.SCOPES,
+  if (typeof google === 'undefined') { alert('Google sign-in not loaded yet. Please wait a moment and try again.'); return; }
+  const tc = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
     callback: async (resp) => {
       if (resp.error) { alert('Sign in failed: ' + resp.error); return; }
-      state.accessToken = resp.access_token;
-      await fetchUserInfo();
+      token = resp.access_token;
+      const u = await fetchUser();
+      saveSession(token, u);
+      applyUser(u);
       showScreen('upload');
       setDateDisplay();
       loadGallery();
     },
   });
-  tokenClient.requestAccessToken();
+  tc.requestAccessToken();
 }
 
-async function fetchUserInfo() {
-  const r = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-    headers: { Authorization: 'Bearer ' + state.accessToken }
-  });
-  const u = await r.json();
-  saveSession(state.accessToken, u);
-  applyUser(u);
+async function fetchUser() {
+  const r = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', { headers: { Authorization: 'Bearer ' + token } });
+  return await r.json();
 }
 
-// ============================================================
-// FILE HANDLING & EXIF
-// ============================================================
-function triggerFilePick() {
-  document.getElementById('file-input').click();
+function applyUser(u) {
+  currentUser = u;
+  const ini = ((u.given_name||'?')[0] + (u.family_name||'')[0]).toUpperCase();
+  const name = (u.given_name||'') + ' ' + ((u.family_name||'')[0]||'') + '.';
+  document.getElementById('av1').textContent = ini;
+  document.getElementById('av2').textContent = ini;
+  document.getElementById('uname').textContent = name;
+  document.getElementById('uploader-val').textContent = name;
 }
 
-function handleFiles(event) {
-  const newFiles = Array.from(event.target.files);
-  state.selectedFiles = [...state.selectedFiles, ...newFiles];
+function signOut() {
+  clearSession();
+  token = null; currentUser = null; rootFolderId = null;
+  selectedFiles = []; detectedLocation = null;
   renderPreviews();
-  document.getElementById('upload-btn').disabled = state.selectedFiles.length === 0;
+  showScreen('signin');
+}
 
-  // Try to read EXIF from first file
-  if (newFiles.length > 0) readExif(newFiles[0]);
+// ── FILES ────────────────────────────────────────────────────
+function handleFiles(e) {
+  selectedFiles = [...selectedFiles, ...Array.from(e.target.files)];
+  renderPreviews();
+  document.getElementById('up-btn').disabled = selectedFiles.length === 0;
+  if (e.target.files.length > 0) readExif(e.target.files[0]);
+}
+
+function renderPreviews() {
+  const grid = document.getElementById('pgrid');
+  const zone = document.getElementById('pzone-wrap');
+  if (!selectedFiles.length) {
+    zone.style.display = ''; grid.style.display = 'none'; grid.innerHTML = ''; return;
+  }
+  zone.style.display = 'none'; grid.style.display = 'grid'; grid.innerHTML = '';
+  selectedFiles.forEach((f, i) => {
+    const url = URL.createObjectURL(f);
+    const c = document.createElement('div'); c.className = 'pcell';
+    c.innerHTML = `<img src="${url}"><button class="xbtn" onclick="removeFile(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+    grid.appendChild(c);
+  });
+  const add = document.createElement('div'); add.className = 'addcell';
+  add.onclick = () => document.getElementById('file-input').click();
+  add.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+  grid.appendChild(add);
+}
+
+function removeFile(i) {
+  selectedFiles.splice(i, 1);
+  renderPreviews();
+  document.getElementById('up-btn').disabled = selectedFiles.length === 0;
+}
+
+// ── EXIF ─────────────────────────────────────────────────────
+function setDateDisplay() {
+  const d = new Date();
+  detectedDate = d;
+  document.getElementById('date-val').textContent = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 }
 
 function readExif(file) {
   const reader = new FileReader();
   reader.onload = function(e) {
     const view = new DataView(e.target.result);
-    // Look for EXIF GPS data
     let gpsFound = false;
+    try { const gps = extractGPS(view); if (gps) { reverseGeocode(gps.lat, gps.lng); gpsFound = true; } } catch(err) {}
     try {
-      const gps = extractGPS(view);
-      if (gps) {
-        reverseGeocode(gps.lat, gps.lng);
-        gpsFound = true;
+      const ds = extractExifDateStr(view);
+      if (ds) {
+        const parts = ds.match(/(\d+):(\d+):(\d+) (\d+):(\d+):(\d+)/);
+        if (parts) { detectedDate = new Date(parts[1],parts[2]-1,parts[3],parts[4],parts[5],parts[6]); document.getElementById('date-val').textContent = detectedDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); }
       }
     } catch(err) {}
-
-    // Try to get date from EXIF
-    try {
-      const dateStr = extractExifDate(view);
-      if (dateStr) {
-        const d = parseExifDate(dateStr);
-        state.detectedDate = d;
-        document.getElementById('date-display').textContent = d.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'});
-        document.getElementById('date-display').classList.remove('loading');
-      }
-    } catch(err) {}
-
-    if (!gpsFound) {
-      // Try browser geolocation as fallback
-      if (navigator.geolocation) {
-        document.getElementById('gps-display').textContent = 'Getting your location...';
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            reverseGeocode(pos.coords.latitude, pos.coords.longitude);
-          },
-          () => {
-            // Geolocation denied or failed — ask user to type location
-            document.getElementById('gps-display').textContent = 'Tap to enter job address';
-            document.getElementById('gps-display').style.cursor = 'pointer';
-            document.getElementById('gps-display').style.color = '#1a73e8';
-            document.getElementById('gps-display').onclick = () => {
-              const addr = prompt('Enter the job address (e.g. 1234 Elm St, Dallas):');
-              if (addr) {
-                state.detectedLocation = addr;
-                document.getElementById('gps-display').textContent = addr;
-                document.getElementById('gps-display').style.color = '';
-                document.getElementById('gps-display').style.cursor = '';
-              }
-            };
-          },
-          { timeout: 8000 }
-        );
-      } else {
-        document.getElementById('gps-display').textContent = 'Tap to enter job address';
-        document.getElementById('gps-display').style.cursor = 'pointer';
-        document.getElementById('gps-display').style.color = '#1a73e8';
-        document.getElementById('gps-display').onclick = () => {
-          const addr = prompt('Enter the job address (e.g. 1234 Elm St, Dallas):');
-          if (addr) {
-            state.detectedLocation = addr;
-            document.getElementById('gps-display').textContent = addr;
-            document.getElementById('gps-display').style.color = '';
-            document.getElementById('gps-display').style.cursor = '';
-          }
-        };
-      }
-    }
+    if (!gpsFound) tryBrowserGeo();
   };
-  reader.readAsArrayBuffer(file.slice(0, 131072)); // Read first 128KB for EXIF
+  reader.readAsArrayBuffer(file.slice(0, 131072));
 }
 
 function extractGPS(view) {
-  if (view.getUint16(0, false) !== 0xFFD8) return null;
-  let offset = 2;
-  while (offset < view.byteLength - 1) {
-    const marker = view.getUint16(offset, false);
-    offset += 2;
-    if (marker === 0xFFE1) { // APP1 / EXIF
-      const exifOffset = offset + 2;
-      const endian = view.getUint16(exifOffset, false) === 0x4949;
-      const ifdOffset = view.getUint32(exifOffset + 4, endian) + exifOffset;
-      return parseIFDforGPS(view, ifdOffset, exifOffset, endian);
+  if (view.getUint16(0,false) !== 0xFFD8) return null;
+  let off = 2;
+  while (off < view.byteLength - 1) {
+    const mk = view.getUint16(off,false); off += 2;
+    if (mk === 0xFFE1) {
+      const base = off + 2;
+      const le = view.getUint16(base,false) === 0x4949;
+      const ifd = view.getUint32(base+4,le) + base;
+      return parseGPS(view, ifd, base, le);
     }
-    offset += view.getUint16(offset, false);
+    if (off + 2 > view.byteLength) break;
+    off += view.getUint16(off,false);
   }
   return null;
 }
 
-function parseIFDforGPS(view, ifdOffset, exifBase, le) {
+function parseGPS(view, ifd, base, le) {
   try {
-    const count = view.getUint16(ifdOffset, le);
-    for (let i = 0; i < count; i++) {
-      const entry = ifdOffset + 2 + i * 12;
-      const tag = view.getUint16(entry, le);
-      if (tag === 0x8825) { // GPSInfo tag
-        const gpsIFDOffset = view.getUint32(entry + 8, le) + exifBase;
-        return parseGPSIFD(view, gpsIFDOffset, exifBase, le);
+    const n = view.getUint16(ifd,le);
+    for (let i=0;i<n;i++) {
+      const e = ifd+2+i*12;
+      if (view.getUint16(e,le) === 0x8825) {
+        const go = view.getUint32(e+8,le)+base;
+        const gn = view.getUint16(go,le);
+        let lat=null,lng=null,latr='N',lngr='E';
+        for (let j=0;j<gn;j++) {
+          const g = go+2+j*12;
+          const gt = view.getUint16(g,le);
+          const gv = view.getUint32(g+8,le)+base;
+          if (gt===1) latr=String.fromCharCode(view.getUint8(g+8));
+          else if (gt===3) lngr=String.fromCharCode(view.getUint8(g+8));
+          else if (gt===2) lat=rationals(view,gv,le);
+          else if (gt===4) lng=rationals(view,gv,le);
+        }
+        if (lat&&lng) {
+          let la=lat[0]+lat[1]/60+lat[2]/3600;
+          let lo=lng[0]+lng[1]/60+lng[2]/3600;
+          if(latr==='S')la=-la; if(lngr==='W')lo=-lo;
+          return {lat:la,lng:lo};
+        }
       }
     }
   } catch(e) {}
   return null;
 }
 
-function parseGPSIFD(view, offset, base, le) {
-  try {
-    const count = view.getUint16(offset, le);
-    let lat=null, lng=null, latRef='N', lngRef='E';
-    for (let i = 0; i < count; i++) {
-      const e = offset + 2 + i * 12;
-      const tag = view.getUint16(e, le);
-      if (tag === 1) latRef = String.fromCharCode(view.getUint8(e + 8));
-      if (tag === 3) lngRef = String.fromCharCode(view.getUint8(e + 8));
-      if (tag === 2) lat = readRationals(view, view.getUint32(e+8,le)+base, le);
-      if (tag === 4) lng = readRationals(view, view.getUint32(e+8,le)+base, le);
-    }
-    if (lat && lng) {
-      let la = lat[0] + lat[1]/60 + lat[2]/3600;
-      let lo = lng[0] + lng[1]/60 + lng[2]/3600;
-      if (latRef === 'S') la = -la;
-      if (lngRef === 'W') lo = -lo;
-      return { lat: la, lng: lo };
-    }
-  } catch(e) {}
-  return null;
-}
-
-function readRationals(view, offset, le) {
+function rationals(view,off,le) {
   return [
-    view.getUint32(offset, le) / view.getUint32(offset+4, le),
-    view.getUint32(offset+8, le) / view.getUint32(offset+12, le),
-    view.getUint32(offset+16, le) / view.getUint32(offset+20, le),
+    view.getUint32(off,le)/view.getUint32(off+4,le),
+    view.getUint32(off+8,le)/view.getUint32(off+12,le),
+    view.getUint32(off+16,le)/view.getUint32(off+20,le),
   ];
 }
 
-function extractExifDate(view) {
-  // Search for DateTimeOriginal tag (0x9003) in EXIF
-  const str = String.fromCharCode.apply(null, new Uint8Array(view.buffer, 0, Math.min(65536, view.byteLength)));
-  const m = str.match(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
+function extractExifDateStr(view) {
+  const bytes = new Uint8Array(view.buffer,0,Math.min(65536,view.byteLength));
+  const str = String.fromCharCode.apply(null,bytes);
+  const m = str.match(/\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/);
   return m ? m[0] : null;
 }
 
-function parseExifDate(str) {
-  const [date, time] = str.split(' ');
-  const [y,mo,d] = date.split(':');
-  const [h,mi,s] = time.split(':');
-  return new Date(y, mo-1, d, h, mi, s);
-}
-
 async function reverseGeocode(lat, lng) {
-  // Uses Nominatim (free, no key needed)
+  setGps('Getting address...');
   try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=16&addressdetails=1`, {
-      headers: { 'Accept-Language': 'en' }
-    });
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=16&addressdetails=1`,{headers:{'Accept-Language':'en'}});
     const d = await r.json();
-    const a = d.address;
+    const a = d.address||{};
     const parts = [];
-    if (a.house_number && a.road) parts.push(a.house_number + ' ' + a.road);
+    if (a.house_number&&a.road) parts.push(a.house_number+' '+a.road);
     else if (a.road) parts.push(a.road);
-    if (a.city || a.town || a.village) parts.push(a.city || a.town || a.village);
+    if (a.city||a.town||a.village) parts.push(a.city||a.town||a.village);
     if (a.state) parts.push(a.state);
-    const label = parts.join(', ');
-    state.detectedLocation = label;
-    document.getElementById('gps-display').textContent = label;
-    document.getElementById('gps-display').classList.remove('loading');
+    const label = parts.join(', ') || `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+    detectedLocation = label;
+    setGps(label, false);
   } catch(e) {
-    document.getElementById('gps-display').textContent = `${lat.toFixed(4)}°, ${lng.toFixed(4)}°`;
-    state.detectedLocation = `GPS_${lat.toFixed(4)}_${lng.toFixed(4)}`;
+    detectedLocation = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+    setGps(detectedLocation, false);
   }
 }
 
-function setDateDisplay() {
-  const now = new Date();
-  state.detectedDate = now;
-  document.getElementById('date-display').textContent = now.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'});
-  document.getElementById('gps-display').textContent = 'Add photos to read GPS';
-  document.getElementById('gps-display').classList.add('loading');
+function tryBrowserGeo() {
+  if (!navigator.geolocation) { showManualAddr(); return; }
+  setGps('Getting your location...');
+  navigator.geolocation.getCurrentPosition(
+    pos => reverseGeocode(pos.coords.latitude, pos.coords.longitude),
+    () => showManualAddr(),
+    { timeout: 8000 }
+  );
 }
 
-function formatDateForFolder(d) {
-  return d.toLocaleDateString('en-US', {month:'short', year:'numeric'});
-}
-
-// ============================================================
-// PREVIEWS
-// ============================================================
-function renderPreviews() {
-  const grid = document.getElementById('preview-grid');
-  const zone = document.getElementById('photo-zone-wrap');
-
-  if (state.selectedFiles.length === 0) {
-    zone.style.display = 'block';
-    grid.style.display = 'none';
-    grid.innerHTML = '';
-    return;
-  }
-
-  zone.style.display = 'none';
-  grid.style.display = 'grid';
-  grid.innerHTML = '';
-
-  state.selectedFiles.forEach((f, i) => {
-    const url = URL.createObjectURL(f);
-    const cell = document.createElement('div');
-    cell.className = 'preview-cell';
-    cell.innerHTML = `<img src="${url}" alt="photo ${i+1}">
-      <button class="del-btn" onclick="removeFile(${i})">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>`;
-    grid.appendChild(cell);
-  });
-
-  // Add more button
-  const addCell = document.createElement('div');
-  addCell.className = 'add-more-cell';
-  addCell.onclick = triggerFilePick;
-  addCell.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
-  grid.appendChild(addCell);
-}
-
-function removeFile(i) {
-  state.selectedFiles.splice(i, 1);
-  renderPreviews();
-  document.getElementById('upload-btn').disabled = state.selectedFiles.length === 0;
-}
-
-function toggleTag(btn) { btn.classList.toggle('on'); }
-
-// ============================================================
-// GOOGLE DRIVE UPLOAD
-// ============================================================
-async function ensureRootFolder() {
-  if (state.rootFolderId) return state.rootFolderId;
-
-  // Search for existing "Field Photos" folder
-  const q = encodeURIComponent(`name='${CONFIG.DRIVE_FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
-  const r = await gdriveRequest(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`);
-  if (r.files && r.files.length > 0) {
-    state.rootFolderId = r.files[0].id;
-    return state.rootFolderId;
-  }
-
-  // Create it
-  const created = await gdriveRequest('https://www.googleapis.com/drive/v3/files', 'POST', {
-    name: CONFIG.DRIVE_FOLDER_NAME,
-    mimeType: 'application/vnd.google-apps.folder',
-  });
-  state.rootFolderId = created.id;
-  return state.rootFolderId;
-}
-
-async function ensureJobFolder(rootId, jobFolderName) {
-  const q = encodeURIComponent(`name='${jobFolderName}' and mimeType='application/vnd.google-apps.folder' and '${rootId}' in parents and trashed=false`);
-  const r = await gdriveRequest(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`);
-  if (r.files && r.files.length > 0) return r.files[0].id;
-
-  const created = await gdriveRequest('https://www.googleapis.com/drive/v3/files', 'POST', {
-    name: jobFolderName,
-    mimeType: 'application/vnd.google-apps.folder',
-    parents: [rootId],
-  });
-  return created.id;
-}
-
-async function uploadFileToDrive(file, folderId, description, tags) {
-  const metadata = {
-    name: file.name,
-    parents: [folderId],
-    description: [
-      description,
-      tags.length ? 'Tags: ' + tags.join(', ') : '',
-      'Uploaded by: ' + (state.user?.name || 'Unknown'),
-      'App: Field Photos'
-    ].filter(Boolean).join('\n'),
+function showManualAddr() {
+  const el = document.getElementById('gps-val');
+  el.textContent = 'Tap to enter job address';
+  el.className = 'aval tap';
+  el.onclick = () => {
+    const a = prompt('Enter the job address:');
+    if (a) { detectedLocation = a; el.textContent = a; el.className = 'aval'; el.onclick = null; }
   };
-
-  const form = new FormData();
-  form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-  form.append('file', file);
-
-  const r = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,webViewLink', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + state.accessToken },
-    body: form,
-  });
-  return await r.json();
 }
 
-async function gdriveRequest(url, method = 'GET', body = null) {
-  const opts = {
-    method,
-    headers: {
-      Authorization: 'Bearer ' + state.accessToken,
-      'Content-Type': 'application/json',
-    },
-  };
+function setGps(text, dim=true) {
+  const el = document.getElementById('gps-val');
+  el.textContent = text;
+  el.className = 'aval' + (dim?' dim':'');
+  el.onclick = null;
+}
+
+// ── DRIVE ────────────────────────────────────────────────────
+async function gapi(url, method='GET', body=null) {
+  const opts = { method, headers: { Authorization:'Bearer '+token, 'Content-Type':'application/json' } };
   if (body) opts.body = JSON.stringify(body);
   const r = await fetch(url, opts);
-  return await r.json();
+  if (!r.ok) throw new Error('Drive API error ' + r.status);
+  return r.json();
+}
+
+async function ensureRoot() {
+  if (rootFolderId) return rootFolderId;
+  const q = encodeURIComponent(`name='${ROOT_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
+  const res = await gapi(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
+  if (res.files&&res.files.length) { rootFolderId=res.files[0].id; return rootFolderId; }
+  const c = await gapi('https://www.googleapis.com/drive/v3/files','POST',{name:ROOT_NAME,mimeType:'application/vnd.google-apps.folder'});
+  rootFolderId = c.id; return rootFolderId;
+}
+
+async function ensureJobFolder(rootId, name) {
+  const q = encodeURIComponent(`name='${name}' and mimeType='application/vnd.google-apps.folder' and '${rootId}' in parents and trashed=false`);
+  const res = await gapi(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
+  if (res.files&&res.files.length) return res.files[0].id;
+  const c = await gapi('https://www.googleapis.com/drive/v3/files','POST',{name,mimeType:'application/vnd.google-apps.folder',parents:[rootId]});
+  return c.id;
+}
+
+async function uploadFile(file, folderId, note, tags) {
+  const meta = {
+    name: file.name, parents:[folderId],
+    description: [note, tags.length?'Tags: '+tags.join(', '):'', 'By: '+(currentUser?.name||'Unknown')].filter(Boolean).join('\n'),
+  };
+  const form = new FormData();
+  form.append('metadata', new Blob([JSON.stringify(meta)],{type:'application/json'}));
+  form.append('file', file);
+  const r = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
+    method:'POST', headers:{Authorization:'Bearer '+token}, body:form
+  });
+  if (!r.ok) throw new Error('Upload error '+r.status);
+  return r.json();
 }
 
 async function startUpload() {
-  if (!state.selectedFiles.length) return;
-
+  if (!selectedFiles.length) return;
   const note = document.getElementById('note-input').value.trim();
-  const tags = Array.from(document.querySelectorAll('.tag-chip.on')).map(b => b.textContent);
+  const tags = Array.from(document.querySelectorAll('.tag.on')).map(b=>b.textContent);
+  const loc = detectedLocation || 'Unknown Location';
+  const dateStr = (detectedDate||new Date()).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const folderName = loc + ' — ' + dateStr;
 
-  // Build folder name
-  const loc = state.detectedLocation || 'Unknown Location';
-  const dateStr = state.detectedDate ? state.detectedDate.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  const folderName = `${loc} — ${dateStr}`;
-
-  showProgress(true);
-  setProgress(0, 'Setting up folders...');
-
+  showProg(true); setProgress(0,'Setting up folders...');
   try {
-    const rootId = await ensureRootFolder();
-    const jobFolderId = await ensureJobFolder(rootId, folderName);
-    state.uploadedFolderId = jobFolderId;
-    state.uploadedFolderName = folderName;
+    const rootId = await ensureRoot();
+    const jobId = await ensureJobFolder(rootId, folderName);
+    lastJobFolderId = jobId; lastJobFolderName = folderName;
 
-    for (let i = 0; i < state.selectedFiles.length; i++) {
-      const f = state.selectedFiles[i];
-      const pct = Math.round(((i) / state.selectedFiles.length) * 100);
-      setProgress(pct, `Uploading ${i+1} of ${state.selectedFiles.length}...`, f.name);
-      await uploadFileToDrive(f, jobFolderId, note, tags);
+    for (let i=0;i<selectedFiles.length;i++) {
+      const f = selectedFiles[i];
+      setProgress(Math.round(i/selectedFiles.length*100), `Uploading ${i+1} of ${selectedFiles.length}...`, f.name);
+      await uploadFile(f, jobId, note, tags);
     }
+    setProgress(100,'Done!');
+    await new Promise(r=>setTimeout(r,600));
+    showProg(false);
 
-    setProgress(100, 'Done!');
-    await new Promise(r => setTimeout(r, 600));
-
-    // Add to local gallery
-    addToGallery(folderName, state.selectedFiles.length, jobFolderId);
-
-    showProgress(false);
+    document.getElementById('ok-folder-name').textContent = folderName;
+    document.getElementById('drive-open-btn').onclick = () => window.open('https://drive.google.com/drive/folders/'+jobId,'_blank');
     showScreen('success');
-    document.getElementById('success-folder-name').textContent = folderName;
-    document.getElementById('drive-open-btn').onclick = () => {
-      window.open(`https://drive.google.com/drive/folders/${jobFolderId}`, '_blank');
-    };
     loadGallery();
-
   } catch(err) {
-    showProgress(false);
-    alert('Upload failed: ' + err.message + '\n\nMake sure your CLIENT_ID is configured in the app.');
+    showProg(false);
+    alert('Upload failed: ' + err.message);
     console.error(err);
   }
 }
 
-function setProgress(pct, label, filename) {
+function setProgress(pct, lbl, file) {
   const circ = 188.5;
-  document.getElementById('progress-circle').style.strokeDashoffset = circ - (circ * pct / 100);
-  document.getElementById('progress-pct').textContent = pct + '%';
-  document.getElementById('progress-label').textContent = label;
-  if (filename) document.getElementById('progress-file').textContent = filename;
+  document.getElementById('pfg').style.strokeDashoffset = circ - circ*pct/100;
+  document.getElementById('prog-pct').textContent = pct+'%';
+  document.getElementById('prog-lbl').textContent = lbl;
+  if (file) document.getElementById('prog-file').textContent = file;
 }
+function showProg(show) { document.getElementById('prog-wrap').classList.toggle('show',show); }
 
-function showProgress(show) {
-  document.getElementById('progress-overlay').classList.toggle('show', show);
-}
-
-// ============================================================
-// GALLERY
-// ============================================================
-let galleryData = { folders: [], recent: [] };
-
-function addToGallery(name, count, id) {
-  galleryData.folders.unshift({ name, count, id });
-}
-
+// ── GALLERY ──────────────────────────────────────────────────
 async function loadGallery() {
-  if (!state.accessToken) return;
+  if (!token) return;
   try {
-    const rootId = await ensureRootFolder();
-    // List sub-folders
+    const rootId = await ensureRoot();
     const q = encodeURIComponent(`'${rootId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`);
-    const r = await gdriveRequest(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,createdTime)&orderBy=createdTime desc`);
-
-    const folders = r.files || [];
-    renderFolders(folders, rootId);
-
-    // Get recent photos across all folders
-    const q2 = encodeURIComponent(`'${rootId}' in parents and mimeType!='application/vnd.google-apps.folder' and trashed=false`);
-    // We'll fetch from root level — for deeper search we'd need recursive
-    // Instead get recent from all sub-folder ids
-    if (folders.length > 0) {
-      const parentQ = folders.slice(0,5).map(f=>`'${f.id}' in parents`).join(' or ');
-      const q3 = encodeURIComponent(`(${parentQ}) and mimeType contains 'image/' and trashed=false`);
-      const r2 = await gdriveRequest(`https://www.googleapis.com/drive/v3/files?q=${q3}&fields=files(id,name,createdTime,thumbnailLink,parents)&orderBy=createdTime desc&pageSize=10`);
-      renderRecent(r2.files || [], folders);
+    const res = await gapi(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,createdTime)&orderBy=createdTime desc`);
+    const folders = res.files||[];
+    renderFolders(folders);
+    if (folders.length) {
+      const pq = folders.slice(0,6).map(f=>`'${f.id}' in parents`).join(' or ');
+      const rq = encodeURIComponent(`(${pq}) and mimeType contains 'image/' and trashed=false`);
+      const rr = await gapi(`https://www.googleapis.com/drive/v3/files?q=${rq}&fields=files(id,name,createdTime,thumbnailLink,parents)&orderBy=createdTime desc&pageSize=15`);
+      const fm = {}; folders.forEach(f=>fm[f.id]=f.name);
+      renderRecent(rr.files||[], fm);
     }
-  } catch(e) {
-    console.error('Gallery load error:', e);
-  }
+  } catch(e) { console.error(e); }
 }
 
-function renderFolders(folders, rootId) {
+function renderFolders(folders) {
   const el = document.getElementById('folder-list');
-  if (!folders.length) {
-    el.innerHTML = `<div class="empty-gallery">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <p>No folders yet</p><small>Upload your first photo to create one</small>
-    </div>`;
-    return;
-  }
-  el.innerHTML = folders.map(f => `
-    <div class="folder-item" onclick="window.open('https://drive.google.com/drive/folders/${f.id}','_blank')">
-      <span class="folder-icon">📁</span>
-      <div class="folder-meta">
-        <div class="folder-name">${f.name}</div>
-        <div class="folder-info">${new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-      </div>
-      <div class="folder-chevron">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </div>
-  `).join('');
+  if (!folders.length) { el.innerHTML='<div class="empty"><p>No folders yet</p><small>Upload your first photo to get started</small></div>'; return; }
+  el.innerHTML = folders.map(f=>`
+    <div class="fitem" onclick="window.open('https://drive.google.com/drive/folders/${f.id}','_blank')">
+      <span class="ficon">📁</span>
+      <div class="fmeta"><div class="fname">${f.name}</div><div class="finfo">${new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div></div>
+      <div class="fchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>`).join('');
 }
 
-function renderRecent(files, folders) {
+function renderRecent(files, fm) {
   const el = document.getElementById('recent-list');
-  if (!files.length) {
-    el.innerHTML = `<div style="padding:16px 16px;font-size:13px;color:var(--gray-400)">No recent photos yet</div>`;
-    return;
-  }
-  const folderMap = {};
-  folders.forEach(f => folderMap[f.id] = f.name);
-
-  el.innerHTML = files.map(f => {
-    const parentId = f.parents?.[0];
-    const folderName = folderMap[parentId] || 'Unknown location';
-    const thumb = f.thumbnailLink ? `<img class="photo-thumb" src="${f.thumbnailLink}" alt="">` : `<div class="photo-thumb"></div>`;
-    return `<div class="photo-item">
-      ${thumb}
-      <div class="photo-info">
-        <div class="photo-name">${folderName}</div>
-        <div class="photo-meta">${new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric'})} · ${f.name}</div>
-      </div>
-    </div>`;
+  if (!files.length) { el.innerHTML='<div class="empty"><p>No photos yet</p></div>'; return; }
+  el.innerHTML = files.map(f=>{
+    const folder = fm[f.parents?.[0]]||'Unknown';
+    const thumb = f.thumbnailLink ? `<img class="pthumb" src="${f.thumbnailLink}">` : `<div class="pthumb"></div>`;
+    return `<div class="pitem">${thumb}<div class="pinfo"><div class="pname">${folder}</div><div class="pmeta">${new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric'})} · ${f.name}</div></div></div>`;
   }).join('');
 }
 
-// ============================================================
-// NAVIGATION
-// ============================================================
-function signOut() {
-  clearSession();
-  state.accessToken = null;
-  state.user = null;
-  state.rootFolderId = null;
-  showScreen('signin');
-}
-
+// ── NAV ──────────────────────────────────────────────────────
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
 }
 
-function showTab(tab) {
+function goTab(tab) {
   showScreen(tab);
-  // sync tab buttons in upload/gallery screens
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  const screen = document.getElementById('screen-' + tab);
-  const tabBtns = screen.querySelectorAll('.tab-btn');
-  tabBtns.forEach(b => { if (b.getAttribute('onclick').includes(tab)) b.classList.add('active'); });
+  document.querySelectorAll('#s-upload .tab, #s-gallery .tab').forEach(b=>b.classList.remove('on'));
+  const active = document.getElementById('s-'+tab);
+  if (active) { const tabs = active.querySelectorAll('.tab'); tabs.forEach(b=>{ if(b.getAttribute('onclick').includes(tab)) b.classList.add('on'); }); }
 }
 
 function resetUpload() {
-  state.selectedFiles = [];
-  state.detectedLocation = null;
-  state.uploadedFolderId = null;
-  renderPreviews();
-  document.getElementById('upload-btn').disabled = true;
-  document.getElementById('note-input').value = '';
-  document.querySelectorAll('.tag-chip.on').forEach(t => t.classList.remove('on'));
+  selectedFiles = []; detectedLocation = null;
   document.getElementById('file-input').value = '';
+  document.getElementById('note-input').value = '';
+  document.querySelectorAll('.tag.on').forEach(t=>t.classList.remove('on'));
+  renderPreviews();
+  document.getElementById('up-btn').disabled = true;
+  setGps('Add photos to detect location', true);
   setDateDisplay();
   showScreen('upload');
 }
 </script>
-
 
 
 </body></html>
