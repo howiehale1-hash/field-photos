@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Field Photos</title>
+<title>SnapFlow</title>
 <script src="https://accounts.google.com/gsi/client" onload="onGoogleReady()"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -15,22 +15,15 @@ body{display:flex;align-items:center;justify-content:center}
 .shell{width:100%;max-width:430px;height:100vh;height:100dvh;background:#fff;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .screen{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;visibility:hidden;opacity:0;transition:opacity 0.2s;pointer-events:none}
 .screen.active{visibility:visible;opacity:1;pointer-events:all}
-
-/* SIGNIN */
 #s-signin{background:#fff;align-items:center;justify-content:flex-start;padding:32px 28px 40px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.si-logo{width:160px;height:auto;margin-bottom:20px;margin-top:8px}
-.si-appname{font-size:11px;font-weight:500;color:#bdc1c6;text-transform:uppercase;letter-spacing:3px;margin-bottom:24px;text-align:center}
+.si-appname{font-size:11px;font-weight:500;color:#bdc1c6;text-transform:uppercase;letter-spacing:3px;margin-bottom:20px;text-align:center}
+.si-logo{width:200px;height:auto;margin-bottom:24px}
 .si-welcome{font-size:22px;font-weight:600;color:#202124;text-align:center;margin-bottom:12px;line-height:1.3}
 .si-desc{font-size:14px;color:#5f6368;text-align:center;line-height:1.7;margin-bottom:24px}
-.prize-box{width:100%;background:#fffbeb;border:1.5px solid #fbbf24;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.prize-box{width:100%;background:#fffbeb;border:1.5px solid #fbbf24;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:24px}
 .prize-ic{font-size:32px;flex-shrink:0}
 .prize-txt strong{display:block;font-size:14px;font-weight:600;color:#92400e;margin-bottom:3px}
 .prize-txt span{font-size:12px;color:#b45309;line-height:1.5}
-.personal-stats{display:flex;align-items:center;justify-content:space-around;padding:10px 8px;background:#f8f9fa;border-bottom:1px solid #e8eaed;flex-shrink:0}
-.ps-item{display:flex;flex-direction:column;align-items:center;gap:1px;flex:1}
-.ps-num{font-size:18px;font-weight:600;color:#1a73e8}
-.ps-lbl{font-size:9px;color:#9aa0a6;text-transform:uppercase;letter-spacing:0.4px;text-align:center}
-.ps-divider{width:1px;height:28px;background:#e8eaed}
 .counter-box{width:100%;display:flex;align-items:center;justify-content:space-around;background:#f8f9fa;border-radius:14px;padding:16px 8px;margin-bottom:24px;border:1px solid #e8eaed}
 .counter-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1}
 .counter-num{font-size:22px;font-weight:600;color:#202124}
@@ -38,22 +31,21 @@ body{display:flex;align-items:center;justify-content:center}
 .counter-divider{width:1px;height:36px;background:#e8eaed}
 .gbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:16px;background:#fff;border:1.5px solid #dadce0;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#3c4043;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
 .si-note{font-size:11px;color:#9aa0a6;text-align:center;margin-top:14px}
-
-/* HEADER */
 .hdr{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid #e8eaed;flex-shrink:0}
-.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0}
-.hdr-name{font-size:15px;font-weight:500;color:#202124;flex:1}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;cursor:pointer}
+.hdr-name{font-size:15px;font-weight:500;color:#202124;flex:1;cursor:pointer}
 .gbadge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:#1e8e3e;background:#e6f4ea;padding:3px 9px;border-radius:99px}
 .gbadge::before{content:'';width:6px;height:6px;background:#1e8e3e;border-radius:50%}
 .sobtn{border:none;background:none;font-size:11px;color:#9aa0a6;cursor:pointer;padding:4px 6px;font-family:'DM Sans',sans-serif}
-
-/* TABS */
+.pstats{display:flex;align-items:center;justify-content:space-around;padding:10px 8px;background:#f8f9fa;border-bottom:1px solid #e8eaed;flex-shrink:0}
+.ps-item{display:flex;flex-direction:column;align-items:center;gap:1px;flex:1}
+.ps-num{font-size:18px;font-weight:600;color:#1a73e8}
+.ps-lbl{font-size:9px;color:#9aa0a6;text-transform:uppercase;letter-spacing:0.4px;text-align:center}
+.ps-div{width:1px;height:28px;background:#e8eaed}
 .tabs{display:flex;border-top:1px solid #e8eaed;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0)}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;color:#bdc1c6;cursor:pointer}
 .tab svg{width:22px;height:22px}
 .tab.on{color:#1a73e8}
-
-/* UPLOAD */
 #s-upload{background:#f8f9fa}
 .scroll{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;padding:13px;display:flex;flex-direction:column;gap:11px}
 .card{background:#fff;border-radius:12px;border:1px solid #e8eaed;overflow:hidden}
@@ -79,7 +71,7 @@ body{display:flex;align-items:center;justify-content:center}
 .aval{font-size:13px;font-weight:500;color:#202124}
 .aval.dim{color:#bdc1c6}
 .aval.tap{color:#1a73e8;cursor:pointer;text-decoration:underline}
-.tags{display:flex;flex-wrap:wrap;gap:8px;padding:4px 14px 14px;max-height:none}
+.tags{display:flex;flex-wrap:wrap;gap:8px;padding:4px 14px 14px}
 .tag{padding:6px 13px;border-radius:99px;font-size:13px;font-weight:500;border:1.5px solid #dadce0;background:transparent;cursor:pointer;color:#5f6368;font-family:'DM Sans',sans-serif}
 .tag.on{border-color:#1a73e8;background:#e8f0fe;color:#1a73e8}
 .noteta{width:100%;padding:12px 14px;border:none;outline:none;resize:none;font-family:'DM Sans',sans-serif;font-size:14px;color:#3c4043;background:transparent;line-height:1.5}
@@ -87,8 +79,6 @@ body{display:flex;align-items:center;justify-content:center}
 .upbtn{width:100%;padding:15px;background:linear-gradient(135deg,#2563eb,#1d4ed8);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 16px rgba(37,99,235,0.3)}
 .upbtn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
 .upbtn svg{width:19px;height:19px}
-
-/* PROGRESS */
 .prog{position:absolute;inset:0;background:rgba(255,255,255,0.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10}
 .prog.show{display:flex}
 .pring{width:72px;height:72px;position:relative}
@@ -98,8 +88,6 @@ body{display:flex;align-items:center;justify-content:center}
 .ppct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#202124}
 .plbl{font-size:14px;color:#5f6368}
 .pfile{font-size:11px;color:#bdc1c6;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* SUCCESS */
 #s-success{align-items:center;justify-content:center;padding:40px 28px}
 .okic{width:76px;height:76px;border-radius:50%;background:#e6f4ea;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .okic svg{width:38px;height:38px;color:#1e8e3e}
@@ -111,8 +99,6 @@ body{display:flex;align-items:center;justify-content:center}
 .drvbtn{width:100%;padding:13px;background:#fff;border:1.5px solid #dadce0;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1a73e8;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}
 .drvbtn svg{width:15px;height:15px}
 .morebtn{width:100%;padding:13px;background:transparent;border:none;font-family:'DM Sans',sans-serif;font-size:14px;color:#9aa0a6;cursor:pointer}
-
-/* GALLERY */
 #s-gallery{background:#f8f9fa}
 .gscroll{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch}
 .gsec{padding:12px 14px 5px;font-size:11px;font-weight:600;color:#9aa0a6;text-transform:uppercase;letter-spacing:0.5px}
@@ -135,7 +121,6 @@ body{display:flex;align-items:center;justify-content:center}
 <body>
 <div class="shell">
 
-<!-- SIGN IN -->
 <div class="screen active" id="s-signin">
   <p class="si-appname">SnapFlow by Howard Hale</p>
   <img class="si-logo" src="https://bens.plumbing/wp-content/uploads/2024/02/logo-bens-for-header-desk-v4.svg" alt="Ben's Plumbing">
@@ -149,23 +134,13 @@ body{display:flex;align-items:center;justify-content:center}
     </div>
   </div>
   <div class="counter-box">
-    <div class="counter-item">
-      <span class="counter-num" id="counter-photos">—</span>
-      <span class="counter-lbl">total photos</span>
-    </div>
+    <div class="counter-item"><span class="counter-num" id="c-total">—</span><span class="counter-lbl">Total Photos</span></div>
     <div class="counter-divider"></div>
-    <div class="counter-item">
-      <span class="counter-num" id="counter-avg">—</span>
-      <span class="counter-lbl">avg per person</span>
-    </div>
+    <div class="counter-item"><span class="counter-num" id="c-avg">—</span><span class="counter-lbl">Avg Per Person</span></div>
     <div class="counter-divider"></div>
-    <div class="counter-item">
-      <span class="counter-num" id="counter-mine">—</span>
-      <span class="counter-lbl">your uploads</span>
-    </div>
+    <div class="counter-item"><span class="counter-num" id="c-mine">—</span><span class="counter-lbl">Your Uploads</span></div>
   </div>
-
-  <button class="gbtn" id="signin-btn" onclick="handleSignIn()">
+  <button class="gbtn" onclick="handleSignIn()">
     <svg width="20" height="20" viewBox="0 0 48 48">
       <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.33 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/>
       <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -177,29 +152,19 @@ body{display:flex;align-items:center;justify-content:center}
   <p class="si-note">Uses your existing Google account — no new password needed</p>
 </div>
 
-<!-- UPLOAD -->
 <div class="screen" id="s-upload">
   <div class="hdr">
-    <div class="av" id="av1" onclick="goHome()" style="cursor:pointer" title="Home">?</div>
-    <span class="hdr-name" id="uname" onclick="goHome()" style="cursor:pointer">—</span>
+    <div class="av" id="av1" onclick="goHome()">?</div>
+    <span class="hdr-name" id="uname" onclick="goHome()">—</span>
     <span class="gbadge">Drive connected</span>
     <button class="sobtn" onclick="signOut()">Sign out</button>
   </div>
-  <div class="personal-stats">
-    <div class="ps-item">
-      <span class="ps-num" id="ps-total">—</span>
-      <span class="ps-lbl">total photos</span>
-    </div>
-    <div class="ps-divider"></div>
-    <div class="ps-item">
-      <span class="ps-num" id="ps-avg">—</span>
-      <span class="ps-lbl">avg per person</span>
-    </div>
-    <div class="ps-divider"></div>
-    <div class="ps-item">
-      <span class="ps-num" id="ps-mine">—</span>
-      <span class="ps-lbl">your uploads</span>
-    </div>
+  <div class="pstats">
+    <div class="ps-item"><span class="ps-num" id="ps-total">—</span><span class="ps-lbl">Total Photos</span></div>
+    <div class="ps-div"></div>
+    <div class="ps-item"><span class="ps-num" id="ps-avg">—</span><span class="ps-lbl">Avg Per Person</span></div>
+    <div class="ps-div"></div>
+    <div class="ps-item"><span class="ps-num" id="ps-mine">—</span><span class="ps-lbl">Your Uploads</span></div>
   </div>
   <div class="scroll">
     <div class="card">
@@ -278,7 +243,6 @@ body{display:flex;align-items:center;justify-content:center}
   </div>
 </div>
 
-<!-- SUCCESS -->
 <div class="screen" id="s-success">
   <div class="okic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
   <p class="oktitle">Photos uploaded!</p>
@@ -295,7 +259,6 @@ body{display:flex;align-items:center;justify-content:center}
   <button class="morebtn" onclick="resetUpload()">Upload more photos</button>
 </div>
 
-<!-- GALLERY -->
 <div class="screen" id="s-gallery">
   <div class="hdr">
     <div class="av" id="av2">?</div>
@@ -327,283 +290,199 @@ body{display:flex;align-items:center;justify-content:center}
 <script>
 const CLIENT_ID = '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
-const ROOT_NAME = 'Field Photos';
 const ROOT_FOLDER_ID = '1LX2LFFPVWCIdfTfK1hm55Nt_kidp84VZ';
 const SK = 'fp_sess';
+let token=null,currentUser=null,selectedFiles=[],detectedLocation=null,detectedDate=null,rootFolderId=null,tokenClient=null;
 
-let token = null, currentUser = null, selectedFiles = [], detectedLocation = null, detectedDate = null, rootFolderId = null, tokenClient = null;
+function saveSession(t,u){try{localStorage.setItem(SK,JSON.stringify({t,u,exp:Date.now()+30*24*60*60*1000}));}catch(e){}}
+function loadSession(){try{const s=JSON.parse(localStorage.getItem(SK));if(!s||Date.now()>s.exp){localStorage.removeItem(SK);return null;}return s;}catch(e){return null;}}
+function clearSession(){try{localStorage.removeItem(SK);}catch(e){}}
 
-// SESSION
-function saveSession(t, u) { try { localStorage.setItem(SK, JSON.stringify({t, u, exp: Date.now() + 30*24*60*60*1000})); } catch(e) {} }
-function loadSession() { try { const s = JSON.parse(localStorage.getItem(SK)); if (!s || Date.now() > s.exp) { localStorage.removeItem(SK); return null; } return s; } catch(e) { return null; } }
-function clearSession() { try { localStorage.removeItem(SK); } catch(e) {} }
-
-// BOOT
-function loadPublicCounters() {
-  // Counters need sign-in to read Drive — show dashes until then
-  document.getElementById('counter-photos').textContent = '—';
-  document.getElementById('counter-avg').textContent = '—';
-  document.getElementById('counter-mine').textContent = '—';
-}
-
-async function updateCounters() {
-  if (!token) return;
-  try {
-    const rootId = await ensureRoot();
-    const q = encodeURIComponent("'" + rootId + "' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false");
-    const res = await driveReq('https://www.googleapis.com/drive/v3/files?q=' + q + '&fields=files(id)');
-    const folders = res.files || [];
-
-    if (folders.length) {
-      const pq = folders.slice(0,10).map(f => "'" + f.id + "' in parents").join(' or ');
-      const rq = encodeURIComponent('(' + pq + ") and mimeType contains 'image/' and trashed=false");
-      const rr = await driveReq('https://www.googleapis.com/drive/v3/files?q=' + rq + '&fields=files(id,description)&pageSize=1000');
-      const photos = rr.files || [];
-      const total = photos.length;
-
-      // Count unique uploaders
-      const uploaders = {};
-      photos.forEach(p => {
-        if (!p.description) return;
-        const m = p.description.match(/By: (.+)/);
-        if (m) { const name = m[1].split('\n')[0].trim(); uploaders[name] = (uploaders[name]||0) + 1; }
-      });
-      const uploaderCount = Object.keys(uploaders).length;
-      const avg = uploaderCount > 0 ? Math.round(total / uploaderCount) : 0;
-
-      // My uploads
-      const myName = currentUser && currentUser.name ? currentUser.name : null;
-      const myCount = myName ? (uploaders[myName] || 0) : 0;
-
-      // Update signin counters
-      document.getElementById('counter-photos').textContent = total;
-      document.getElementById('counter-avg').textContent = avg;
-      document.getElementById('counter-mine').textContent = myCount;
-
-      // Update upload screen stats bar
-      document.getElementById('ps-total').textContent = total;
-      document.getElementById('ps-avg').textContent = avg;
-      document.getElementById('ps-mine').textContent = myCount;
-    }
-  } catch(e) { console.error(e); }
-}
-
-
-
-
-function initClient() {
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: SCOPES,
-    callback: async (resp) => {
-      if (resp.error) { alert('Sign in failed: ' + resp.error); return; }
-      token = resp.access_token;
-      const u = await fetchUser();
-      saveSession(token, u);
-      applyUser(u);
-      showScreen('upload');
-      setDateNow();
-      loadGallery();
-      updateCounters();
+function onGoogleReady(){
+  tokenClient=google.accounts.oauth2.initTokenClient({
+    client_id:CLIENT_ID,scope:SCOPES,
+    callback:async(resp)=>{
+      if(resp.error){alert('Sign in failed: '+resp.error);return;}
+      token=resp.access_token;
+      const u=await fetchUser();
+      saveSession(token,u);applyUser(u);
+      showScreen('upload');setDateNow();loadGallery();updateCounters();
     }
   });
+  const s=loadSession();
+  if(s){token=s.t;applyUser(s.u);showScreen('upload');setDateNow();loadGallery();updateCounters();}
+  else showScreen('signin');
 }
 
-function handleSignIn() {
-  tokenClient.requestAccessToken();
-}
+function handleSignIn(){tokenClient.requestAccessToken();}
 
-async function fetchUser() {
-  const r = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {headers:{Authorization:'Bearer '+token}});
+async function fetchUser(){
+  const r=await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{headers:{Authorization:'Bearer '+token}});
   return r.json();
 }
 
-function applyUser(u) {
-  currentUser = u;
-  const ini = ((u.given_name||'?')[0]+(u.family_name||'')[0]).toUpperCase();
-  const name = (u.given_name||'') + ' ' + ((u.family_name||'')[0]||'') + '.';
-  document.getElementById('av1').textContent = ini;
-  document.getElementById('av2').textContent = ini;
-  document.getElementById('uname').textContent = name;
-  document.getElementById('uploader-val').textContent = name;
+function applyUser(u){
+  currentUser=u;
+  const ini=((u.given_name||'?')[0]+(u.family_name||'')[0]).toUpperCase();
+  const name=(u.given_name||'')+' '+((u.family_name||'')[0]||'')+'.';
+  document.getElementById('av1').textContent=ini;
+  document.getElementById('av2').textContent=ini;
+  document.getElementById('uname').textContent=name;
+  document.getElementById('uploader-val').textContent=name;
 }
 
-function signOut() {
-  clearSession();
-  token = null; currentUser = null; rootFolderId = null; selectedFiles = []; detectedLocation = null;
+function signOut(){
+  clearSession();token=null;currentUser=null;rootFolderId=null;selectedFiles=[];detectedLocation=null;
+  renderPreviews();showScreen('signin');
+}
+
+function handleFiles(e){
+  selectedFiles=[...selectedFiles,...Array.from(e.target.files)];
   renderPreviews();
-  showScreen('signin');
+  document.getElementById('up-btn').disabled=selectedFiles.length===0;
+  if(e.target.files.length>0)readExif(e.target.files[0]);
 }
 
-// FILES
-function handleFiles(e) {
-  selectedFiles = [...selectedFiles, ...Array.from(e.target.files)];
-  renderPreviews();
-  document.getElementById('up-btn').disabled = selectedFiles.length === 0;
-  if (e.target.files.length > 0) readExif(e.target.files[0]);
-}
-
-function renderPreviews() {
-  const grid = document.getElementById('pgrid');
-  const zone = document.getElementById('pzone-wrap');
-  if (!selectedFiles.length) { zone.style.display=''; grid.style.display='none'; grid.innerHTML=''; return; }
-  zone.style.display='none'; grid.style.display='grid'; grid.innerHTML='';
-  selectedFiles.forEach((f,i) => {
-    const url = URL.createObjectURL(f);
-    const c = document.createElement('div'); c.className='pcell';
-    c.innerHTML = '<img src="'+url+'"><button class="xbtn" onclick="removeFile('+i+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+function renderPreviews(){
+  const grid=document.getElementById('pgrid'),zone=document.getElementById('pzone-wrap');
+  if(!selectedFiles.length){zone.style.display='';grid.style.display='none';grid.innerHTML='';return;}
+  zone.style.display='none';grid.style.display='grid';grid.innerHTML='';
+  selectedFiles.forEach((f,i)=>{
+    const url=URL.createObjectURL(f),c=document.createElement('div');c.className='pcell';
+    c.innerHTML='<img src="'+url+'"><button class="xbtn" onclick="removeFile('+i+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
     grid.appendChild(c);
   });
-  const add = document.createElement('div'); add.className='acell';
-  add.onclick = () => document.getElementById('fi').click();
-  add.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+  const add=document.createElement('div');add.className='acell';
+  add.onclick=()=>document.getElementById('fi').click();
+  add.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
   grid.appendChild(add);
 }
 
-function removeFile(i) {
-  selectedFiles.splice(i,1); renderPreviews();
-  document.getElementById('up-btn').disabled = selectedFiles.length === 0;
+function removeFile(i){selectedFiles.splice(i,1);renderPreviews();document.getElementById('up-btn').disabled=selectedFiles.length===0;}
+
+function setDateNow(){
+  detectedDate=new Date();
+  document.getElementById('date-val').textContent=detectedDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 }
 
-// EXIF
-function setDateNow() {
-  detectedDate = new Date();
-  document.getElementById('date-val').textContent = detectedDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-}
-
-function readExif(file) {
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const view = new DataView(e.target.result);
-    let gpsFound = false;
-    try { const gps = getGPS(view); if (gps) { reverseGeocode(gps.lat, gps.lng); gpsFound = true; } } catch(err) {}
-    try {
-      const bytes = new Uint8Array(view.buffer, 0, Math.min(65536, view.byteLength));
-      const str = String.fromCharCode.apply(null, bytes);
-      const m = str.match(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
-      if (m) { detectedDate = new Date(m[1],m[2]-1,m[3],m[4],m[5],m[6]); document.getElementById('date-val').textContent = detectedDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); }
-    } catch(err) {}
-    if (!gpsFound) tryGeo();
+function readExif(file){
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const view=new DataView(e.target.result);
+    let gpsFound=false;
+    try{const gps=getGPS(view);if(gps){reverseGeocode(gps.lat,gps.lng);gpsFound=true;}}catch(err){}
+    try{
+      const bytes=new Uint8Array(view.buffer,0,Math.min(65536,view.byteLength));
+      const str=String.fromCharCode.apply(null,bytes);
+      const m=str.match(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
+      if(m){detectedDate=new Date(m[1],m[2]-1,m[3],m[4],m[5],m[6]);document.getElementById('date-val').textContent=detectedDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+    }catch(err){}
+    if(!gpsFound)tryGeo();
   };
-  reader.readAsArrayBuffer(file.slice(0, 131072));
+  reader.readAsArrayBuffer(file.slice(0,131072));
 }
 
-function getGPS(view) {
-  if (view.getUint16(0,false) !== 0xFFD8) return null;
-  let off = 2;
-  while (off < view.byteLength-1) {
-    const mk = view.getUint16(off,false); off += 2;
-    if (mk === 0xFFE1) {
-      const base = off+2;
-      const le = view.getUint16(base,false)===0x4949;
-      const ifd = view.getUint32(base+4,le)+base;
-      const n = view.getUint16(ifd,le);
-      for (let i=0;i<n;i++) {
-        const entry = ifd+2+i*12;
-        if (view.getUint16(entry,le)===0x8825) {
-          const go = view.getUint32(entry+8,le)+base;
-          const gn = view.getUint16(go,le);
+function getGPS(view){
+  if(view.getUint16(0,false)!==0xFFD8)return null;
+  let off=2;
+  while(off<view.byteLength-1){
+    const mk=view.getUint16(off,false);off+=2;
+    if(mk===0xFFE1){
+      const base=off+2,le=view.getUint16(base,false)===0x4949,ifd=view.getUint32(base+4,le)+base,n=view.getUint16(ifd,le);
+      for(let i=0;i<n;i++){
+        const entry=ifd+2+i*12;
+        if(view.getUint16(entry,le)===0x8825){
+          const go=view.getUint32(entry+8,le)+base,gn=view.getUint16(go,le);
           let lat=null,lng=null,latr='N',lngr='E';
-          for (let j=0;j<gn;j++) {
-            const g=go+2+j*12, gt=view.getUint16(g,le), gv=view.getUint32(g+8,le)+base;
+          for(let j=0;j<gn;j++){
+            const g=go+2+j*12,gt=view.getUint16(g,le),gv=view.getUint32(g+8,le)+base;
             if(gt===1)latr=String.fromCharCode(view.getUint8(g+8));
             else if(gt===3)lngr=String.fromCharCode(view.getUint8(g+8));
             else if(gt===2)lat=[view.getUint32(gv,le)/view.getUint32(gv+4,le),view.getUint32(gv+8,le)/view.getUint32(gv+12,le),view.getUint32(gv+16,le)/view.getUint32(gv+20,le)];
             else if(gt===4)lng=[view.getUint32(gv,le)/view.getUint32(gv+4,le),view.getUint32(gv+8,le)/view.getUint32(gv+12,le),view.getUint32(gv+16,le)/view.getUint32(gv+20,le)];
           }
           if(lat&&lng){
-            let la=lat[0]+lat[1]/60+lat[2]/3600, lo=lng[0]+lng[1]/60+lng[2]/3600;
-            if(latr==='S')la=-la; if(lngr==='W')lo=-lo;
-            return {lat:la,lng:lo};
+            let la=lat[0]+lat[1]/60+lat[2]/3600,lo=lng[0]+lng[1]/60+lng[2]/3600;
+            if(latr==='S')la=-la;if(lngr==='W')lo=-lo;
+            return{lat:la,lng:lo};
           }
         }
       }
       return null;
     }
     if(off+2>view.byteLength)break;
-    off += view.getUint16(off,false);
+    off+=view.getUint16(off,false);
   }
   return null;
 }
 
-async function reverseGeocode(lat, lng) {
-  setGps('Getting address...', true);
-  try {
-    const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&zoom=16&addressdetails=1',{headers:{'Accept-Language':'en'}});
-    const d = await r.json(); const a = d.address||{};
-    const parts=[];
-    if(a.house_number&&a.road)parts.push(a.house_number+' '+a.road);
-    else if(a.road)parts.push(a.road);
+async function reverseGeocode(lat,lng){
+  setGps('Getting address...',true);
+  try{
+    const r=await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&zoom=16&addressdetails=1',{headers:{'Accept-Language':'en'}});
+    const d=await r.json(),a=d.address||{},parts=[];
+    if(a.house_number&&a.road)parts.push(a.house_number+' '+a.road);else if(a.road)parts.push(a.road);
     if(a.city||a.town||a.village)parts.push(a.city||a.town||a.village);
     if(a.state)parts.push(a.state);
-    detectedLocation = parts.join(', ')||lat.toFixed(4)+', '+lng.toFixed(4);
-    setGps(detectedLocation, false);
-  } catch(e) { detectedLocation=lat.toFixed(4)+', '+lng.toFixed(4); setGps(detectedLocation,false); }
+    detectedLocation=parts.join(', ')||lat.toFixed(4)+', '+lng.toFixed(4);
+    setGps(detectedLocation,false);
+  }catch(e){detectedLocation=lat.toFixed(4)+', '+lng.toFixed(4);setGps(detectedLocation,false);}
 }
 
-function tryGeo() {
-  if (!navigator.geolocation) { showManual(); return; }
-  setGps('Getting your location...', true);
-  navigator.geolocation.getCurrentPosition(
-    pos => reverseGeocode(pos.coords.latitude, pos.coords.longitude),
-    () => showManual(), {timeout:8000}
-  );
+function tryGeo(){
+  if(!navigator.geolocation){showManual();return;}
+  setGps('Getting your location...',true);
+  navigator.geolocation.getCurrentPosition(pos=>reverseGeocode(pos.coords.latitude,pos.coords.longitude),()=>showManual(),{timeout:8000});
 }
 
-function showManual() {
-  const el = document.getElementById('gps-val');
-  el.textContent='Tap to enter job address'; el.className='aval tap';
-  el.onclick=()=>{ const a=prompt('Enter job address:'); if(a){detectedLocation=a; el.textContent=a; el.className='aval'; el.onclick=null;} };
+function showManual(){
+  const el=document.getElementById('gps-val');
+  el.textContent='Tap to enter job address';el.className='aval tap';
+  el.onclick=()=>{const a=prompt('Enter job address:');if(a){detectedLocation=a;el.textContent=a;el.className='aval';el.onclick=null;}};
 }
 
-function setGps(text, dim) {
-  const el=document.getElementById('gps-val'); el.textContent=text; el.className='aval'+(dim?' dim':''); el.onclick=null;
+function setGps(text,dim){
+  const el=document.getElementById('gps-val');el.textContent=text;el.className='aval'+(dim?' dim':'');el.onclick=null;
 }
 
-// DRIVE
-async function driveReq(url, method, body) {
+async function driveReq(url,method,body){
   const opts={method:method||'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'}};
-  if(body) opts.body=JSON.stringify(body);
+  if(body)opts.body=JSON.stringify(body);
   const r=await fetch(url,opts);
-  if(!r.ok) throw new Error('Drive error '+r.status);
+  if(!r.ok)throw new Error('Drive error '+r.status);
   return r.json();
 }
 
-async function ensureRoot() {
-  if(rootFolderId) return rootFolderId;
-  rootFolderId = ROOT_FOLDER_ID;
-  return rootFolderId;
-}
+async function ensureRoot(){if(rootFolderId)return rootFolderId;rootFolderId=ROOT_FOLDER_ID;return rootFolderId;}
 
-async function ensureFolder(rootId, name) {
+async function ensureFolder(rootId,name){
   const q=encodeURIComponent("name='"+name+"' and mimeType='application/vnd.google-apps.folder' and '"+rootId+"' in parents and trashed=false");
   const res=await driveReq('https://www.googleapis.com/drive/v3/files?q='+q+'&fields=files(id)');
-  if(res.files&&res.files.length) return res.files[0].id;
+  if(res.files&&res.files.length)return res.files[0].id;
   const c=await driveReq('https://www.googleapis.com/drive/v3/files','POST',{name,mimeType:'application/vnd.google-apps.folder',parents:[rootId]});
   return c.id;
 }
 
-async function uploadFile(file, folderId, note, tags) {
+async function uploadFile(file,folderId,note,tags){
   const meta={name:file.name,parents:[folderId],description:[note,tags.length?'Tags: '+tags.join(', '):'','By: '+(currentUser&&currentUser.name||'Unknown')].filter(Boolean).join('\n')};
   const form=new FormData();
   form.append('metadata',new Blob([JSON.stringify(meta)],{type:'application/json'}));
   form.append('file',file);
   const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{Authorization:'Bearer '+token},body:form});
-  if(!r.ok) throw new Error('Upload error '+r.status);
+  if(!r.ok)throw new Error('Upload error '+r.status);
   return r.json();
 }
 
-async function startUpload() {
-  if(!selectedFiles.length) return;
+async function startUpload(){
+  if(!selectedFiles.length)return;
   const note=document.getElementById('note-input').value.trim();
   const tags=Array.from(document.querySelectorAll('.tag.on')).map(b=>b.textContent);
   const loc=detectedLocation||'Unknown Location';
   const dateStr=(detectedDate||new Date()).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
   const folderName=loc+' — '+dateStr;
-  showProg(true); setProg(0,'Setting up folders...');
-  try {
-    const rootId=await ensureRoot();
-    const jobId=await ensureFolder(rootId, folderName);
+  showProg(true);setProg(0,'Setting up folders...');
+  try{
+    const rootId=await ensureRoot(),jobId=await ensureFolder(rootId,folderName);
     for(let i=0;i<selectedFiles.length;i++){
       const f=selectedFiles[i];
       setProg(Math.round(i/selectedFiles.length*100),'Uploading '+(i+1)+' of '+selectedFiles.length+'...',f.name);
@@ -614,15 +493,11 @@ async function startUpload() {
     showProg(false);
     document.getElementById('ok-folder').textContent=folderName;
     document.getElementById('drv-btn').onclick=()=>window.open('https://drive.google.com/drive/folders/'+jobId,'_blank');
-    showScreen('success');
-    loadGallery();
-  } catch(err) {
-    showProg(false);
-    alert('Upload failed: '+err.message);
-  }
+    showScreen('success');loadGallery();updateCounters();
+  }catch(err){showProg(false);alert('Upload failed: '+err.message);}
 }
 
-function setProg(pct,lbl,file) {
+function setProg(pct,lbl,file){
   document.getElementById('pfg').style.strokeDashoffset=188.5-188.5*pct/100;
   document.getElementById('ppct').textContent=pct+'%';
   document.getElementById('plbl').textContent=lbl;
@@ -630,44 +505,62 @@ function setProg(pct,lbl,file) {
 }
 function showProg(show){document.getElementById('prog').classList.toggle('show',show);}
 
-// GALLERY
-async function loadGallery() {
-  if(!token) return;
-  try {
+async function updateCounters(){
+  if(!token)return;
+  try{
+    const rootId=await ensureRoot();
+    const q=encodeURIComponent("'"+rootId+"' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false");
+    const res=await driveReq('https://www.googleapis.com/drive/v3/files?q='+q+'&fields=files(id)');
+    const folders=res.files||[];
+    if(folders.length){
+      const pq=folders.slice(0,10).map(f=>"'"+f.id+"' in parents").join(' or ');
+      const rq=encodeURIComponent('('+pq+") and mimeType contains 'image/' and trashed=false");
+      const rr=await driveReq('https://www.googleapis.com/drive/v3/files?q='+rq+'&fields=files(id,description)&pageSize=1000');
+      const photos=rr.files||[],total=photos.length;
+      const uploaders={};
+      photos.forEach(p=>{
+        if(!p.description)return;
+        const m=p.description.match(/By: (.+)/);
+        if(m){const name=m[1].split('\\n')[0].trim();uploaders[name]=(uploaders[name]||0)+1;}
+      });
+      const count=Object.keys(uploaders).length,avg=count>0?Math.round(total/count):0;
+      const myName=currentUser&&currentUser.name?currentUser.name:null;
+      const mine=myName?(uploaders[myName]||0):0;
+      ['c-total','ps-total'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=total;});
+      ['c-avg','ps-avg'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=avg;});
+      ['c-mine','ps-mine'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=mine;});
+    }
+  }catch(e){console.error(e);}
+}
+
+async function loadGallery(){
+  if(!token)return;
+  try{
     const rootId=await ensureRoot();
     const q=encodeURIComponent("'"+rootId+"' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false");
     const res=await driveReq('https://www.googleapis.com/drive/v3/files?q='+q+'&fields=files(id,name,createdTime)&orderBy=createdTime desc');
-    const folders=res.files||[];
-    const fl=document.getElementById('folder-list');
+    const folders=res.files||[],fl=document.getElementById('folder-list');
     if(!folders.length){fl.innerHTML='<div class="empty"><p>No folders yet</p><small>Upload your first photo to get started</small></div>';}
     else{fl.innerHTML=folders.map(f=>'<div class="fitem" onclick="window.open(\'https://drive.google.com/drive/folders/'+f.id+'\',\'_blank\')"><span class="fic">📁</span><div class="fmeta"><div class="fname">'+f.name+'</div><div class="fdate">'+new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'</div></div><div class="fchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div></div>').join('');}
     if(folders.length){
       const pq=folders.slice(0,6).map(f=>"'"+f.id+"' in parents").join(' or ');
       const rq=encodeURIComponent('('+pq+") and mimeType contains 'image/' and trashed=false");
       const rr=await driveReq('https://www.googleapis.com/drive/v3/files?q='+rq+'&fields=files(id,name,createdTime,thumbnailLink,parents)&orderBy=createdTime desc&pageSize=15');
-      const fm={}; folders.forEach(f=>fm[f.id]=f.name);
-      const rl=document.getElementById('recent-list');
-      const files=rr.files||[];
+      const fm={};folders.forEach(f=>fm[f.id]=f.name);
+      const rl=document.getElementById('recent-list'),files=rr.files||[];
       if(!files.length){rl.innerHTML='<div class="empty"><p>No photos yet</p></div>';}
       else{rl.innerHTML=files.map(f=>'<div class="pitem">'+(f.thumbnailLink?'<img class="pthumb" src="'+f.thumbnailLink+'">':"<div class='pthumb'></div>")+'<div class="pinfo"><div class="pname">'+(fm[f.parents&&f.parents[0]]||'Unknown')+'</div><div class="pmeta">'+new Date(f.createdTime).toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+f.name+'</div></div></div>').join('');}
     }
-  } catch(e){console.error(e);}
+  }catch(e){console.error(e);}
 }
 
-// NAV
-function goHome() {
-  updateCounters();
-  showScreen('signin');
-}
-
+function goHome(){updateCounters();showScreen('signin');}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');}
-
 function goTab(tab){
   showScreen(tab);
   document.querySelectorAll('#s-upload .tab,#s-gallery .tab').forEach(b=>b.classList.remove('on'));
   document.querySelectorAll('#s-'+tab+' .tab').forEach(b=>{if(b.getAttribute('onclick').includes("'"+tab+"'"))b.classList.add('on');});
 }
-
 function resetUpload(){
   selectedFiles=[];detectedLocation=null;
   document.getElementById('fi').value='';
@@ -676,8 +569,7 @@ function resetUpload(){
   renderPreviews();
   document.getElementById('up-btn').disabled=true;
   setGps('Add photos to detect location',true);
-  setDateNow();
-  showScreen('upload');
+  setDateNow();showScreen('upload');
 }
 </script>
 </body>
