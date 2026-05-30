@@ -709,7 +709,7 @@ let state = {
 function handleSignIn() {
   // Use Google Identity Services token flow
   const tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com',
+    client_id: CONFIG.CLIENT_ID,
     scope: CONFIG.SCOPES,
     callback: async (resp) => {
       if (resp.error) { alert('Sign in failed: ' + resp.error); return; }
