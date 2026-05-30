@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_3.html -->
+<!-- saved from url=(0045)file:///C:/Users/manif/Downloads/index_4.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -498,7 +498,7 @@ body {
 
 </div><!-- end shell -->
 
-<script src="./index_files/client" async="" defer=""></script>
+<script src="./index_files/client"></script>
 <script>
 // ── CONFIG ──────────────────────────────────────────────────
 const CLIENT_ID = '641843286774-cqsr8fh6s7oev01201aera4ljd9ci2fj.apps.googleusercontent.com';
@@ -548,7 +548,23 @@ window.addEventListener('load', () => {
 
 // ── AUTH ─────────────────────────────────────────────────────
 function handleSignIn() {
-  if (typeof google === 'undefined') { alert('Google sign-in not loaded yet. Please wait a moment and try again.'); return; }
+  if (typeof google === 'undefined' || !google.accounts) {
+    const btn = document.querySelector('.g-btn');
+    const orig = btn.innerHTML;
+    btn.textContent = 'Loading...';
+    const wait = setInterval(() => {
+      if (typeof google !== 'undefined' && google.accounts) {
+        clearInterval(wait);
+        btn.innerHTML = orig;
+        triggerGoogleLogin();
+      }
+    }, 200);
+    return;
+  }
+  triggerGoogleLogin();
+}
+
+function triggerGoogleLogin() {
   const tc = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
